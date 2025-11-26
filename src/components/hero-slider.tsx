@@ -1,8 +1,8 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
-import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function HeroSlider() {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -36,7 +36,7 @@ export function HeroSlider() {
       setActiveSlide((prev) => {
         const next = (prev + 1) % slideCount;
         // When looping from last to first, go left to right
-        setDirection(prev === slideCount - 1 && next === 0 ? -1 : 1);
+        setDirection ((prev === slideCount - 1 && next === 0) ? -1 : 1) 
         return next;
       });
     }, 5000);

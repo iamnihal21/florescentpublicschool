@@ -1,9 +1,10 @@
 "use client";
 
-import { ChevronDown, Menu } from "lucide-react";
-import Image from "next/image";
 import { useState } from "react";
+import { Menu, ChevronDown } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import { FullMenu } from "./full-menu";
 
 export function Header() {

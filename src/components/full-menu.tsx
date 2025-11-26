@@ -1,11 +1,13 @@
 "use client";
 
-import { ChevronLeft, ChevronRight, Search, X } from "lucide-react";
 import { useState } from "react";
+import { Search, ChevronRight, ChevronLeft, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
+// import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
+// import Image from "next/image";
 
 interface MenuItem {
   label: string;
@@ -116,9 +118,9 @@ export function FullMenu({ isOpen, onClose }: FullMenuProps) {
             className="w-3 h-3"
             fill="none"
             stroke="currentColor"
-            viewBox="0 0 24 24"
+            viewBox="0 0 24 24" 
           >
-            <title>Portals</title>
+            <title>Prtals</title>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
