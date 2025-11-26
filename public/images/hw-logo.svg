@@ -1,0 +1,9 @@
+<svg width="240" height="80" viewBox="0 0 240 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="80" height="80" fill="#8B1A1A"/>
+  <rect x="5" y="5" width="70" height="70" fill="#C8102E"/>
+  <path d="M40 20L50 35L40 50L30 35L40 20Z" fill="#FFD700"/>
+  <path d="M40 30L45 38L40 46L35 38L40 30Z" fill="#1A1A1A"/>
+  <text x="95" y="35" font-family="serif" font-size="24" font-weight="bold" fill="white">HARVARD</text>
+  <text x="95" y="55" font-family="serif" font-size="20" font-weight="normal" fill="white">WESTLAKE</text>
+  <text x="95" y="70" font-family="sans-serif" font-size="12" letter-spacing="2" fill="white">SCHOOL</text>
+</svg>
