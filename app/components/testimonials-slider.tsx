@@ -161,7 +161,7 @@ export function TestimonialsSlider() {
           <div className="flex items-center justify-center gap-4 mt-12">
             <button
               onClick={handlePrevious}
-              className="w-12 h-12 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors flex items-center justify-center shadow-lg"
+              className="w-12 h-12 rounded-full bg-secondary text-primary-foreground hover:bg-primary/90 transition-colors flex items-center justify-center shadow-lg"
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="w-6 h-6" />
@@ -186,7 +186,7 @@ export function TestimonialsSlider() {
 
             <button
               onClick={handleNext}
-              className="w-12 h-12 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors flex items-center justify-center shadow-lg"
+              className="w-12 h-12 rounded-full bg-secondary text-primary-foreground hover:bg-primary/90 transition-colors flex items-center justify-center shadow-lg"
               aria-label="Next testimonial"
             >
               <ChevronRight className="w-6 h-6" />
