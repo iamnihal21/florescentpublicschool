@@ -13,40 +13,42 @@ export function Header() {
 
   return (
     <>
-      <header className="absolute top-0 left-0 right-0 z-50 px-6 py-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
+      <header className="absolute top-0 left-0 right-0 z-50 px-4 py-3 md:px-6 md:py-4">
+        <div className="flex items-center justify-between w-full">
+
+          {/* LEFT — Menu + Logo, always left aligned */}
+          <div className="flex items-center gap-3 md:gap-4">
             <Button
               variant="ghost"
               onClick={() => setIsMenuOpen(true)}
-              className="text-white hover:text-gray-200 hover:bg-white/10 transition-colors p-2 rounded-md"
-              aria-label="Open menu"
+              className="text-white hover:text-gray-200 hover:bg-white/10 transition p-2 rounded-md"
             >
               <Menu className="h-6 w-6" />
             </Button>
 
             <Image
               src="/UI/button.svg"
-              alt="Harvard-Westlake School"
+              alt="School Logo"
               width={200}
               height={80}
-              className="h-16 w-auto"
+              className="h-12 w-auto md:h-16"
             />
           </div>
-          {/* </CHANGE> */}
 
-          <nav className="flex items-center gap-8">
+          {/* RIGHT — Inquiry + Payment (visible even on mobile) */}
+          <nav className="flex items-center gap-4 md:gap-8">
             <Button
               variant="ghost"
               onClick={() => setIsInquiryOpen(true)}
-              className="text-white font-semibold text-xl tracking-wide flex items-center gap-1 hover:text-gray-200 hover:bg-transparent transition-colors h-auto p-0"
+              className="text-white font-semibold text-base md:text-xl tracking-wide flex items-center gap-1 hover:text-gray-200 hover:bg-transparent p-0"
             >
               Inquiry
               <ChevronDown className="w-4 h-4" />
             </Button>
+
             <Button
               variant="ghost"
-              className="text-xl text-white font-semibold tracking-wide hover:text-gray-200 hover:bg-transparent transition-colors h-auto p-0"
+              className="text-white font-semibold text-base md:text-xl tracking-wide hover:text-gray-200 hover:bg-transparent p-0"
             >
               Payment
             </Button>
@@ -54,7 +56,7 @@ export function Header() {
         </div>
       </header>
 
-
+      {/* Popups */}
       <FullMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
       <AdmissionInquiry isOpen={isInquiryOpen} onClose={() => setIsInquiryOpen(false)} />
     </>
