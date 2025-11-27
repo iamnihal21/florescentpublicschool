@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Menu, ChevronDown } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "../../public/UI/button";
 import Image from "next/image";
 import { FullMenu } from "./full-menu";
 

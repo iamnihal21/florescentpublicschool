@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { Search, ChevronRight, ChevronLeft, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { Button } from "../../public/UI/button";
+import { Input } from "../../public/UI/input";
+import { ScrollArea } from "../../public/UI/scroll-area";
 // import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 // import Image from "next/image";
