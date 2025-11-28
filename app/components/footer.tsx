@@ -119,7 +119,7 @@ export function Footer() {
             <div className="space-y-4">
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-primary mt-1" />
-                <p className="text-gray-300 leading-relaxed">
+                <p className="text-gray-400 leading-relaxed">
                   3700 Coldwater Canyon Ave
                   <br />
                   Studio City, CA 91604
@@ -127,13 +127,13 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-primary" />
-                <a href="tel:+18189801234" className="text-gray-300 hover:text-primary transition-colors">
+                <a href="tel:+18189801234" className="text-gray-400 hover:text-primary transition-colors">
                   (818) 980-1234
                 </a>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-primary" />
-                <a href="mailto:admissions@hw.com" className="text-gray-300 hover:text-primary transition-colors">
+                <a href="mailto:admissions@hw.com" className="text-gray-400 hover:text-primary transition-colors">
                   admissions@hw.com
                 </a>
               </div>
@@ -162,7 +162,7 @@ export function Footer() {
                 >
                   <Link
                     href={`/${item.toLowerCase().replace(" ", "-")}`}
-                    className="text-gray-300 hover:text-primary transition-colors"
+                    className="text-gray-400 hover:text-primary transition-colors"
                   >
                     {item}
                   </Link>
