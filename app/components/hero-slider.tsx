@@ -17,7 +17,7 @@ export function HeroSlider() {
       highlightWord: "YOUR",
     },
     {
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsUn5p6ZYVIxT6PPT4jOuNM7bPalmgMxEtQ&s",
+      image: "https://images.pexels.com/photos/256395/pexels-photo-256395.jpeg?cs=srgb&dl=pexels-pixabay-256395.jpg&fm=jpg",
       title: "PURSUE YOUR PASSION",
       highlightWord: "YOUR",
     },
@@ -199,3 +199,4 @@ export function HeroSlider() {
     </section>
   )
 }
+
