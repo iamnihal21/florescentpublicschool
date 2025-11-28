@@ -18,7 +18,7 @@ const cards: CardData[] = [
     title: "Singing & Performance",
     description: "Experience the power of musical expression through our award-winning vocal programs and performance opportunities.",
     buttonText: "Explore Music",
-    imageUrl: "/UI/image.png",
+    imageUrl: "/UI/trusteeImage.png",
     imageAlt: "Students performing",
   },
   {
@@ -237,4 +237,5 @@ export function ContentSection() {
       </div>
     </section>
   )
+
 }
