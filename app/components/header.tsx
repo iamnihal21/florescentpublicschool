@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Menu, ChevronDown } from "lucide-react"
-import { Button } from "@"
+import { Button } from "@/public/UI/button"
 import Image from "next/image"
 import { FullMenu } from "./full-menu"
 import AdmissionInquiry from "./admissionInquiry"
@@ -61,4 +61,5 @@ export function Header() {
       <AdmissionInquiry isOpen={isInquiryOpen} onClose={() => setIsInquiryOpen(false)} />
     </>
   )
+
 }
