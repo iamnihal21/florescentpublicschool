@@ -12,7 +12,7 @@ export default function Page() {
     <main className="min-h-screen">
       <Header />
       <HeroSlider />
-      <DiscoverSection />
+      {/* <DiscoverSection /> */}
       <ContentSection />
       <ResultsSection />
       <TestimonialsSlider />
