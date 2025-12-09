@@ -149,7 +149,7 @@ export function Footer() {
           <p className="text-gray-500 text-sm">
             <span className="text-[#D4A84B]">#SchoolWebsite Design</span> by{" "}
             <Link href="#" className="text-[#D4A84B] hover:underline">
-              Interactive Schools
+              Tell2U Studio
             </Link>
           </p>
         </div>

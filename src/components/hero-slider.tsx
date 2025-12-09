@@ -36,13 +36,9 @@ export function HeroSlider() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setActiveSlide((prev) => {
-        const next = (prev + 1) % slides.length
-        if (prev === slides.length - 1 && next === 0) {
-          setDirection(-1)
-        } else {
-          setDirection(1)
-        }
+      setActiveSlide(prev => {
+        const next = (prev + 1) % slides.length;
+        (prev === slides.length - 1 && next === 0) ? setDirection(-1) : setDirection(1);
         return next
       })
     }, 5000)

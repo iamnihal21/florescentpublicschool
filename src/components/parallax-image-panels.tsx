@@ -57,32 +57,6 @@ export function ParallaxImagePanels() {
         />
       </motion.div>
 
-      {/* Wolverine watermark on right side */}
-      <div className="fixed right-12 top-0 h-full w-[200px] pointer-events-none z-0 opacity-30">
-        <svg
-          viewBox="0 0 200 600"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-full w-full"
-          preserveAspectRatio="xMidYMid slice"
-        >
-          <path
-            d="M100 50 C120 80, 150 100, 160 150 C170 200, 150 250, 140 280 C130 310, 150 340, 160 380 C170 420, 150 460, 130 500 C110 540, 90 560, 100 580"
-            stroke="#C4B5A3"
-            strokeWidth="2"
-            fill="none"
-          />
-          <path
-            d="M80 100 C60 130, 40 160, 50 200 C60 240, 80 270, 70 310 C60 350, 40 390, 50 430 C60 470, 80 500, 70 540"
-            stroke="#C4B5A3"
-            strokeWidth="2"
-            fill="none"
-          />
-          <circle cx="100" cy="200" r="40" stroke="#C4B5A3" strokeWidth="2" fill="none" />
-          <circle cx="100" cy="400" r="50" stroke="#C4B5A3" strokeWidth="2" fill="none" />
-        </svg>
-      </div>
-
       {panels.map((panel, index) => (
         <ParallaxPanel key={panel.id} panel={panel} index={index} isLast={index === panels.length - 1} />
       ))}
