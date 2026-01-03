@@ -1,8 +1,21 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { ContactUs } from "@/payload/payload-types" // Import the generated type
 
-export function MapsSection() {
+interface MapsSectionProps {
+  contactInfo: ContactUs // This matches the type from your payload-types.ts
+}
+
+export function MapsSection({ contactInfo }: MapsSectionProps) {
+  // Extract data from the contactInfo prop with fallbacks
+  const address = contactInfo?.schoolAddress || {
+    street: "3700 Coldwater Canyon Ave",
+    city: "Studio City, CA 91604"
+  }
+  const phone = contactInfo?.primaryContact?.phone || "(818) 487-6600"
+  const mapUrl = contactInfo?.locationInfo?.mapEmbedUrl || "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3671.026315496377!2d72.52242187!3d23.05949679!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e835519d27f37%3A0xa903dd3f424f9a0f!2sFlorescent%20school!5e0!3m2!1sen!2sin!4v1767283150067!5m2!1sen!2sin"
+
   return (
     <section className="py-16 bg-background">
       <div className="container mx-auto px-4">
@@ -17,11 +30,11 @@ export function MapsSection() {
           >
             <h2 className="text-4xl font-bold text-foreground mb-4">Visit Our Campus</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Come explore our state-of-the-art facilities and experience our vibrant learning community firsthand.
+              Come explore our state-of-the-art facilities and experience our community firsthand.
             </p>
           </motion.div>
 
-          {/* Map */}
+          {/* Map - Using Dynamic URL from Payload */}
           <motion.div
             className="relative w-full h-[500px] rounded-lg overflow-hidden shadow-lg border border-border"
             initial={{ opacity: 0, scale: 0.95 }}
@@ -30,7 +43,7 @@ export function MapsSection() {
             viewport={{ once: true }}
           >
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.0244310670387!2d72.5199150753149!3d23.059565879147904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e835519d27f37%3A0xa903dd3f424f9a0f!2sFlorescent%20school!5e0!3m2!1sen!2sin!4v1763745880149!5m2!1sen!2sin"
+              src={mapUrl}
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -41,26 +54,26 @@ export function MapsSection() {
             />
           </motion.div>
 
-          {/* Info Cards */}
+          {/* Info Cards - Using Dynamic Data from Payload */}
           <div className="mt-8 grid md:grid-cols-3 gap-6 text-center">
             {[ 
               {
                 title: "Address",
                 content: (
                   <>
-                    3700 Coldwater Canyon Ave
+                    {address.street}
                     <br />
-                    Studio City, CA 91604
+                    {address.city}
                   </>
                 )
               },
               {
                 title: "Phone",
-                content: "(818) 487-6600"
+                content: phone
               },
               {
-                title: "Hours",
-                content: "Mon - Fri: 8:00 AM - 4:00 PM"
+                title: "Response Time",
+                content: contactInfo?.responseTime?.admissionResponse || "24-48 Hours"
               }
             ].map((item, index) => (
               <motion.div
@@ -72,7 +85,7 @@ export function MapsSection() {
                 viewport={{ once: true }}
               >
                 <h3 className="font-semibold text-foreground mb-2">{item.title}</h3>
-                <p className="text-muted-foreground">{item.content}</p>
+                <div className="text-muted-foreground">{item.content}</div>
               </motion.div>
             ))}
           </div>
@@ -81,3 +94,5 @@ export function MapsSection() {
     </section>
   )
 }
+
+

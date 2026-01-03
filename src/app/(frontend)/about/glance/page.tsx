@@ -333,8 +333,8 @@
 
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
-import { payload } from "@/app/(frontend)/lib/payload-client"
-import type { Leadership, SchoolPhilosophy } from "@/payload-types"
+import { payloadClient } from "@/app/(frontend)/lib/payload-client"
+// import type { Leadership, SchoolPhilosophy } from "@/payload-types"
 
 export default function LeadershipPage() {
   const [director, setDirector] = useState<any>(null)
@@ -347,9 +347,9 @@ export default function LeadershipPage() {
       try {
         // Fetch all data using helper functions
         const [directorData, principalData, philosophyData] = await Promise.all([
-          payload.getLeadership('director'),
-          payload.getLeadership('principal'),
-          payload.getSchoolPhilosophy(),
+          payloadClient.getLeadership('director'),
+          payloadClient.getLeadership('principal'),
+          payloadClient.getSchoolPhilosophy(),
         ])
 
         // Set Director data

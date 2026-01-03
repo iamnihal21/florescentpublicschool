@@ -1,226 +1,192 @@
-'use client'
+// 'use client'
 
-import Image from 'next/image'
-import { Button } from '../../../../../public/UI/button'
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef } from 'react'
+// import { useRef } from 'react'
+// import { useScroll } from 'framer-motion'
+// import { HomePage } from '@/payload/payload-types'
+// import { ContentCard } from './content-section-client'
 
-interface CardData {
+// type Card = NonNullable<HomePage['scrollCards']>[number]
+
+// export function ContentSectionClient({ cards }: { cards: Card[] }) {
+//   const containerRef = useRef<HTMLDivElement>(null)
+
+//   const { scrollYProgress } = useScroll({
+//     target: containerRef,
+//     offset: ['start start', 'end end'],
+//   })
+
+//   return (
+//     <section ref={containerRef} className="relative h-[400vh] bg-background">
+//       <div className="sticky top-0 h-screen">
+//         <div className="grid grid-cols-1 lg:grid-cols-2 h-full relative">
+//           {cards.map((card, index) => (
+//             <ContentCard
+//               key={index}
+//               card={card}
+//               index={index}
+//               total={cards.length}
+//               scrollYProgress={scrollYProgress}
+//             />
+//           ))}
+//         </div>
+//       </div>
+//     </section>
+//   )
+// }
+
+import { getPayloadClient } from '@/app/(frontend)/lib/payload-client'
+import { ContentSectionClient } from './content-section-client'
+import { HomePage } from '@/payload/payload-types'
+
+// This is a Server Component that fetches data
+export async function ContentSectionData() {
+  try {
+    const payload = await getPayloadClient()
+
+    // Fetch the home page global data
+    const homeData = await payload.findGlobal({
+      slug: 'home-page',
+      depth: 2 // Important for nested relationships
+    }) as HomePage
+
+    // Extract scroll cards from home data
+    // Adjust this based on your actual data structure
+    const scrollCards = homeData.scrollCards || []
+
+    // Alternative: If scrollCards is a separate collection
+    // const scrollCardsResult = await payload.find({
+    //   collection: 'home_page_scroll_cards',
+    //   sort: '_order',
+    //   depth: 2
+    // })
+    // const scrollCards = scrollCardsResult.docs
+
+    // Log for debugging
+    console.log('Fetched scroll cards:', {
+      count: scrollCards.length,
+      data: scrollCards
+    })
+
+    if (!scrollCards || scrollCards.length === 0) {
+      console.warn('No scroll cards found in database')
+      return (
+        <div className="py-24 text-center">
+          <h2 className="text-2xl font-semibold text-gray-600">
+            Content section data not available
+          </h2>
+          <p className="text-gray-500 mt-2">
+            Check your database for home_page_scroll_cards collection
+          </p>
+        </div>
+      )
+    }
+
+    return <ContentSectionClient cards={scrollCards} />
+
+  } catch (error) {
+    console.error('Error fetching content section data:', error)
+
+    return (
+      <div className="py-24 bg-red-50 text-center">
+        <h2 className="text-2xl font-semibold text-red-600">
+          Error loading content
+        </h2>
+        <p className="text-red-500 mt-2">
+          Failed to fetch data from database
+        </p>
+        <pre className="mt-4 text-sm text-red-400 max-w-lg mx-auto bg-red-100 p-4 rounded">
+          {error instanceof Error ? error.message : 'Unknown error'}
+        </pre>
+      </div>
+    )
+  }
+}
+
+// Utility function to fetch data directly (can be used elsewhere)
+export async function fetchScrollCardsData() {
+  try {
+    const payload = await getPayloadClient()
+
+    // Option 1: Fetch from global
+    const homeData = await payload.findGlobal({
+      slug: 'home-page',
+      depth: 2
+    }) as HomePage
+
+    return homeData.scrollCards || []
+
+    // Option 2: If you have a separate collection
+    /*
+    const result = await payload.find({
+      collection: 'home_page_scroll_cards',
+      sort: '_order',
+      depth: 2,
+      where: {
+        _parent_id: {
+          equals: null
+        }
+      }
+    })
+    return result.docs
+    */
+  } catch (error) {
+    console.error('Error in fetchScrollCardsData:', error)
+    return []
+  }
+}
+
+// Type for the fetched data
+export interface ScrollCardData {
+  id?: string
   title: string
   description: string
   buttonText?: string
-  imageUrl: string
-  imageAlt: string
+  image?: any
+  _order?: number
+  _parent_id?: string | null
 }
 
-const cards: CardData[] = [
-  {
-    title: 'Singing & Performance',
-    description:
-      'Experience the power of musical expression through our award-winning vocal programs and performance opportunities.',
-    buttonText: 'Explore Music',
-    imageUrl: '/UI/trusteeImage.png',
-    imageAlt: 'Students performing',
-  },
-  {
-    title: 'Academic Excellence',
-    description:
-      'Discover rigorous academic programs that challenge and inspire students to reach their full potential.',
-    buttonText: 'Learn More',
-    imageUrl: '/UI/musicIimage.png',
-    imageAlt: 'Students in classroom',
-  },
-  {
-    title: 'Athletic Programs',
-    description:
-      'Join our competitive sports teams and develop leadership, teamwork, and athletic skills.',
-    buttonText: 'View Athletics',
-    imageUrl: '/UI/playImage.png',
-    imageAlt: 'Sports field',
-  },
-  {
-    title: 'Campus Life',
-    description:
-      'Be part of a vibrant community with state-of-the-art facilities and endless opportunities for growth.',
-    buttonText: 'Explore Campus',
-    imageUrl: '/UI/classroomIimage.png',
-    imageAlt: 'Campus facilities',
-  },
-]
-
-export function ContentSection() {
-  const containerRef = useRef<HTMLDivElement>(null)
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end'],
-  })
-
-  return (
-    <section ref={containerRef} className="relative h-[400vh] bg-background">
-      {/* Fixed Frame Container */}
-      <div className="sticky top-0 h-screen flex items-center justify-center p-6">
-        {/* Main Frame - This stays fixed throughout */}
-        <div className="w-full max-w-7xl h-[85vh] rounded-3xl overflow-hidden shadow-2xl border-2 border-border/20 bg-card relative">
-          {/* Background Frame that stays constant */}
-          <div className="absolute inset-0 bg-linear-to-br from-background via-card to-muted/30" />
-
-          {/* Grid Layout Frame */}
-          <div className="absolute inset-0 grid grid-cols-1 lg:grid-cols-2 gap-8 p-8 md:p-12">
-            {/* Left Side - Content Area */}
-            <div className="flex flex-col justify-center space-y-6 z-10">
-              {cards.map((card, index) => {
-                const total = cards.length
-                const start = index / total
-                const end = (index + 1) / total
-
-                const contentOpacity = useTransform(
-                  scrollYProgress,
-                  [start, start + 0.1, end - 0.1, end],
-                  [0, 1, 1, 0],
-                )
-
-                const contentY = useTransform(scrollYProgress, [start, start + 0.15], [30, 0])
-
-                const scale = useTransform(scrollYProgress, [start, start + 0.1], [0.95, 1])
-
-                return (
-                  <motion.div
-                    key={`content-${index}`}
-                    style={{
-                      opacity: contentOpacity,
-                      y: contentY,
-                      scale,
-                      position: 'absolute',
-                    }}
-                    className="w-full max-w-lg"
-                  >
-                    <motion.h2
-                      className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6"
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                    >
-                      {card.title}
-                    </motion.h2>
-
-                    <motion.p
-                      className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed"
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      transition={{ delay: 0.2 }}
-                    >
-                      {card.description}
-                    </motion.p>
-
-                    {card.buttonText && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4 }}
-                      >
-                        <Button
-                          size="lg"
-                          className="bg-primary hover:bg-primary/90 text-primary-foreground"
-                        >
-                          {card.buttonText}
-                        </Button>
-                      </motion.div>
-                    )}
-                  </motion.div>
-                )
-              })}
-            </div>
-
-            {/* Right Side - Image Area */}
-            <div className="flex items-center justify-center relative">
-              {cards.map((card, index) => {
-                const total = cards.length
-                const start = index / total
-                const end = (index + 1) / total
-
-                const imageOpacity = useTransform(
-                  scrollYProgress,
-                  [start, start + 0.1, end - 0.1, end],
-                  [0, 1, 1, 0],
-                )
-
-                const imageScale = useTransform(scrollYProgress, [start, start + 0.15], [0.8, 1])
-
-                const imageRotate = useTransform(scrollYProgress, [start, start + 0.2], [-5, 0])
-
-                return (
-                  <motion.div
-                    key={`image-${index}`}
-                    style={{
-                      opacity: imageOpacity,
-                      scale: imageScale,
-                      rotate: imageRotate,
-                      position: 'absolute',
-                    }}
-                    className="w-full h-full max-h-[500px] relative"
-                  >
-                    {/* Image Container with Frame-like styling */}
-                    <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl border border-border/50">
-                      <Image
-                        src={card.imageUrl}
-                        alt={card.imageAlt}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                      />
-
-                      {/* Gradient Overlay */}
-                      <div className="absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-transparent" />
-                    </div>
-
-                    {/* Floating decorative elements */}
-                    <motion.div
-                      className="absolute -top-4 -right-4 w-8 h-8 bg-primary rounded-full"
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      transition={{ delay: 0.6 }}
-                    />
-                    <motion.div
-                      className="absolute -bottom-4 -left-4 w-6 h-6 bg-secondary rounded-full"
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      transition={{ delay: 0.8 }}
-                    />
-                  </motion.div>
-                )
-              })}
-            </div>
-          </div>
-
-          {/* Progress Indicator */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
-            {cards.map((_, index) => {
-              const total = cards.length
-              const start = index / total
-              const end = (index + 1) / total
-
-              const dotOpacity = useTransform(
-                scrollYProgress,
-                [start, start + 0.1, end - 0.1, end],
-                [0.3, 1, 1, 0.3],
-              )
-
-              const dotScale = useTransform(scrollYProgress, [start, start + 0.1], [0.8, 1.2])
-
-              return (
-                <motion.div
-                  key={`dot-${index}`}
-                  style={{
-                    opacity: dotOpacity,
-                    scale: dotScale,
-                  }}
-                  className="w-3 h-3 bg-primary rounded-full transition-all duration-300"
-                />
-              )
-            })}
-          </div>
-        </div>
-      </div>
-    </section>
-  )
+// Database query helper (if you need direct SQL)
+export async function queryScrollCardsFromDB() {
+  // If you want to use direct SQL instead of Payload
+  /*
+  import { sql } from '@vercel/postgres'
+  
+  try {
+    const { rows } = await sql`
+      SELECT 
+        id,
+        title,
+        description,
+        button_text as "buttonText",
+        image_id,
+        _order,
+        _parent_id
+      FROM home_page_scroll_cards
+      WHERE _parent_id IS NULL
+      ORDER BY _order ASC
+    `
+    
+    // You'll need to join with media table for images
+    const cardsWithImages = await Promise.all(
+      rows.map(async (row) => {
+        if (row.image_id) {
+          const { rows: mediaRows } = await sql`
+            SELECT url, alt FROM media WHERE id = ${row.image_id}
+          `
+          return {
+            ...row,
+            image: mediaRows[0] || null
+          }
+        }
+        return row
+      })
+    )
+    
+    return cardsWithImages
+  } catch (error) {
+    console.error('SQL Error:', error)
+    return []
+  }
+  */
 }

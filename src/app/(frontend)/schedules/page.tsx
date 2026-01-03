@@ -378,7 +378,7 @@
 import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
 import { Calendar, Clock, FileText } from "lucide-react"
-import { payload } from "@/app/(frontend)/lib/payload-client"
+import { payloadClient } from "@/app/(frontend)/lib/payload-client"
 
 export default function AcademicsPage() {
   const [loading, setLoading] = useState(true)
@@ -416,11 +416,11 @@ export default function AcademicsPage() {
     const fetchData = async () => {
       try {
         const [events, exams, ptms, guidelines, durationInfo] = await Promise.all([
-          payload.getUpcomingEvents(),
-          payload.getExamsSchedule(),
-          payload.getPTMSchedule(),
-          payload.getPTMGuidelines(),
-          payload.getMeetingDurationInfo()
+          payloadClient.getUpcomingEvents(),
+          payloadClient.getSchedules(),
+          payloadClient.getPTMSchedule(),
+          payloadClient.getPTMGuidelines(),
+          payloadClient.getMeetingDurationInfo()
         ])
 
         // Transform events data

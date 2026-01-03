@@ -764,12 +764,13 @@
 // }
 
 // At the top of your career component, add:
+
 "use client"
 
 import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
 import { Search, Filter, MapPin, Clock, BookOpen, Users, Calculator, Palette, Music, Globe, Briefcase, FileText, Send, Calendar, GraduationCap } from "lucide-react"
-import { payload } from "@/app/(frontend)/lib/payload-client"
+import { payloadClient } from "@/app/(frontend)/lib/payload-client"
 
 // Map icon names to components
 const iconMap = {
@@ -834,11 +835,11 @@ export default function CurrentOpeningsPage() {
     const fetchData = async () => {
       try {
         const [categories, openings, process, tips, contact] = await Promise.all([
-          payload.getCareerCategories(),
-          payload.getCareerOpenings(),
-          payload.getHiringProcess(),
-          payload.getApplicationTips(),
-          payload.getHRContactInfo()
+          payloadClient.getCareerCategories(),
+          payloadClient.getCareerOpenings(),
+          payloadClient.getHiringProcess(),
+          payloadClient.getApplicationTips(),
+          payloadClient.getHRContactInfo()
         ])
 
         setJobCategories(categories)

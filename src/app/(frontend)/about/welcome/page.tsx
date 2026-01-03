@@ -452,13 +452,12 @@
 // }
 
 import { motion } from "framer-motion"
-import { payload } from "@/app/(frontend)/lib/payload-client"
+import { payloadClient } from "@/app/(frontend)/lib/payload-client"
 
 export default async function WelcomePage() {
   // Fetch about page data from Payload CMS
-  const pageData = await payload.getAboutPage('welcome')
-
-  // If no data found, use default structure
+  const pageData = await payloadClient().getAboutPage()
+  // If no data found, use default structure  
   const heroSection = pageData?.heroSection || {
     badgeText: 'About Our Institution',
     title: 'Welcome to Florescent',

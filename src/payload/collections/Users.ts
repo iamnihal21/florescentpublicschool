@@ -1,4 +1,5 @@
-import { CollectionConfig } from 'payload';
+// src/payload/collections/Users.ts
+import type { CollectionConfig } from 'payload'
 
 export const Users: CollectionConfig = {
   slug: 'users',
@@ -7,19 +8,6 @@ export const Users: CollectionConfig = {
     useAsTitle: 'email',
   },
   fields: [
-    {
-      name: 'name',
-      type: 'text',
-    },
-    {
-      name: 'role',
-      type: 'select',
-      options: [
-        { label: 'Admin', value: 'admin' },
-        { label: 'Editor', value: 'editor' },
-        { label: 'Viewer', value: 'viewer' },
-      ],
-      defaultValue: 'viewer',
-    },
+    // Email and Password are added by default via auth: true
   ],
-};
+}

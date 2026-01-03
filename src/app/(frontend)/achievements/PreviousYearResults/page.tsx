@@ -524,11 +524,13 @@
 //     </div>
 //   )
 // }
+
+
 "use client"
 
 import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
-import { payload } from "@/app/(frontend)/lib/payload-client"
+import { payloadClient } from "@/app/(frontend)/lib/payload-client"
 import { 
   Search, ChevronLeft, ChevronRight,
   Maximize2, Award, Calendar, Users,
@@ -566,7 +568,7 @@ export default function ResultsPage() {
         if (selectedYear !== "all") filters.year = selectedYear
         if (selectedClass !== "all") filters.grade = selectedClass
         
-        const resultsData = await payload.getAcademicResults(filters)
+        const resultsData = await payloadClient.getAcademicResults(filters)
         
         if (resultsData.docs) {
           setResults(resultsData.docs)

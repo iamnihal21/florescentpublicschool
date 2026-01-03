@@ -433,7 +433,7 @@
 
 import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
-import { payload } from "@/app/(frontend)/lib/payload-client"
+import { payloadClient } from "@/app/(frontend)/lib/payload-client"
 import { 
   Trophy, Medal, Star, Award, Target,
   Users, BookOpen, Search, Calendar,
@@ -463,8 +463,8 @@ export default function StudentAchievementsPage() {
         setLoading(true)
         
         const [featuredData, allData] = await Promise.all([
-          payload.getStudentAchievements({ featured: true }),
-          payload.getStudentAchievements({}),
+          payloadClient.getStudentAchievements({ featured: true }),
+          payloadClient.getStudentAchievements({}),
         ])
 
         // Set featured students
