@@ -30,7 +30,7 @@ export default buildConfig({
   editor: lexicalEditor({}),
   secret: process.env.PAYLOAD_SECRET || 'YOUR_SECRET_HERE',
   db: postgresAdapter({
-    pool: { connectionString: process.env.DATABASE_URL || '' },
+    pool: { connectionString: process.env.C || '' },
   }),
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
