@@ -28,12 +28,7 @@ const menuData: MenuItem[] = [
     ],
   },
   {
-    label: 'About Us',
-    submenu: [
-      { label: 'Welcome', href: '/about/welcome' },
-      { label: 'From Our Leaders', href: '/about/glance' },
-      { label: 'why choose us', href: '/admissions/why' },
-    ],
+    label: 'About Us', href: '/about',
   },
   {
     label: 'Admission',

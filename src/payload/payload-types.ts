@@ -70,7 +70,6 @@ export interface Config {
     users: User;
     media: Media;
     testimonials: Testimonial;
-    results: Result;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -81,7 +80,6 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
-    results: ResultsSelect<false> | ResultsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -93,13 +91,15 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     'home-page': HomePage;
-    about: About;
+    'about-page': AboutPage;
     'contact-us': ContactUs;
+    'achievements-page': AchievementsPage;
   };
   globalsSelect: {
     'home-page': HomePageSelect<false> | HomePageSelect<true>;
-    about: AboutSelect<false> | AboutSelect<true>;
+    'about-page': AboutPageSelect<false> | AboutPageSelect<true>;
     'contact-us': ContactUsSelect<false> | ContactUsSelect<true>;
+    'achievements-page': AchievementsPageSelect<false> | AchievementsPageSelect<true>;
   };
   locale: null;
   user: User & {
@@ -196,25 +196,6 @@ export interface Testimonial {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "results".
- */
-export interface Result {
-  id: number;
-  year: string;
-  title: string;
-  image: number | Media;
-  stats?:
-    | {
-        label: string;
-        value: string;
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -248,10 +229,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'testimonials';
         value: number | Testimonial;
-      } | null)
-    | ({
-        relationTo: 'results';
-        value: number | Result;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -363,24 +340,6 @@ export interface TestimonialsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "results_select".
- */
-export interface ResultsSelect<T extends boolean = true> {
-  year?: T;
-  title?: T;
-  image?: T;
-  stats?:
-    | T
-    | {
-        label?: T;
-        value?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -462,27 +421,34 @@ export interface HomePage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "about".
+ * via the `definition` "about-page".
  */
-export interface About {
+export interface AboutPage {
   id: number;
-  heroSlides?:
+  hero: {
+    badge?: string | null;
+    title: string;
+    description?: string | null;
+  };
+  leadership?:
     | {
-        title: string;
-        highlightWord?: string | null;
+        name: string;
+        role: string;
         image: number | Media;
+        message: string;
+        gradient?:
+          | ('from-amber-500 to-orange-500' | 'from-purple-500 to-pink-500' | 'from-blue-500 to-cyan-500')
+          | null;
+        achievements?:
+          | {
+              item?: string | null;
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
       }[]
     | null;
-  scrollCards?:
-    | {
-        title: string;
-        description: string;
-        buttonText?: string | null;
-        image: number | Media;
-        id?: string | null;
-      }[]
-    | null;
+  establishedYear?: number | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -505,6 +471,95 @@ export interface ContactUs {
   };
   responseTime?: {
     admissionResponse?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "achievements-page".
+ */
+export interface AchievementsPage {
+  id: number;
+  resultsSection: {
+    title: string;
+    description?: string | null;
+    stats?:
+      | {
+          iconEmoji?: string | null;
+          number: string;
+          label: string;
+          id?: string | null;
+        }[]
+      | null;
+    results?:
+      | {
+          year: string;
+          label: string;
+          percentage: number;
+          image: number | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  schoolAchievements?: {
+    title?: string | null;
+    subtitle?: string | null;
+    stats?:
+      | {
+          number: string;
+          label: string;
+          iconEmoji?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    items?:
+      | {
+          title: string;
+          description?: string | null;
+          image: number | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  studentAchievements?: {
+    title?: string | null;
+    subtitle?: string | null;
+    students?:
+      | {
+          name: string;
+          achievementTitle: string;
+          description: string;
+          image: number | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  coCurricular?: {
+    title?: string | null;
+    description?: string | null;
+    events?:
+      | {
+          title: string;
+          description?: string | null;
+          date?: string | null;
+          location?: string | null;
+          category?: ('Science & Technology' | 'Literary' | 'Sports' | 'Cultural' | 'STEM') | null;
+          images?:
+            | {
+                image: number | Media;
+                id?: string | null;
+              }[]
+            | null;
+          highlights?:
+            | {
+                text?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+        }[]
+      | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -552,26 +607,33 @@ export interface HomePageSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "about_select".
+ * via the `definition` "about-page_select".
  */
-export interface AboutSelect<T extends boolean = true> {
-  heroSlides?:
+export interface AboutPageSelect<T extends boolean = true> {
+  hero?:
     | T
     | {
-        title?: T;
-        highlightWord?: T;
-        image?: T;
-        id?: T;
-      };
-  scrollCards?:
-    | T
-    | {
+        badge?: T;
         title?: T;
         description?: T;
-        buttonText?: T;
+      };
+  leadership?:
+    | T
+    | {
+        name?: T;
+        role?: T;
         image?: T;
+        message?: T;
+        gradient?: T;
+        achievements?:
+          | T
+          | {
+              item?: T;
+              id?: T;
+            };
         id?: T;
       };
+  establishedYear?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -602,6 +664,103 @@ export interface ContactUsSelect<T extends boolean = true> {
     | T
     | {
         admissionResponse?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "achievements-page_select".
+ */
+export interface AchievementsPageSelect<T extends boolean = true> {
+  resultsSection?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        stats?:
+          | T
+          | {
+              iconEmoji?: T;
+              number?: T;
+              label?: T;
+              id?: T;
+            };
+        results?:
+          | T
+          | {
+              year?: T;
+              label?: T;
+              percentage?: T;
+              image?: T;
+              id?: T;
+            };
+      };
+  schoolAchievements?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        stats?:
+          | T
+          | {
+              number?: T;
+              label?: T;
+              iconEmoji?: T;
+              id?: T;
+            };
+        items?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              image?: T;
+              id?: T;
+            };
+      };
+  studentAchievements?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        students?:
+          | T
+          | {
+              name?: T;
+              achievementTitle?: T;
+              description?: T;
+              image?: T;
+              id?: T;
+            };
+      };
+  coCurricular?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        events?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              date?: T;
+              location?: T;
+              category?: T;
+              images?:
+                | T
+                | {
+                    image?: T;
+                    id?: T;
+                  };
+              highlights?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;

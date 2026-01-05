@@ -7,10 +7,10 @@ import sharp from 'sharp'
 
 import Media  from './collections/Media'
 import { Testimonials } from './collections/Testimonials'
-import { Results } from './collections/Results'
 import { Home } from './globals/Home'
-import { About } from './globals/About'
+import { AboutPage } from './globals/AboutPage'
 import { ContactUs } from './globals/Contacts'
+import { AchievementsPage } from './globals/Achievements'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -23,14 +23,12 @@ export default buildConfig({
     { slug: 'users', auth: true, fields: [] },
     Media,
     Testimonials,
-    Results,
   ],
-  globals: [Home,About, 
-    ContactUs],
+  globals: [Home,AboutPage,ContactUs,AchievementsPage],
   editor: lexicalEditor({}),
-  secret: process.env.PAYLOAD_SECRET || 'YOUR_SECRET_HERE',
+  secret: process.env.PAYLOAD_SECRET || '726d7f73873bff8db79de76eb067bad204c2ec494ef95e52824b132622d69e91',
   db: postgresAdapter({
-    pool: { connectionString: process.env.C || '' },
+    pool: { connectionString: process.env.DATABASE_URL || '' },
   }),
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
