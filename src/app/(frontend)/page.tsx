@@ -15,7 +15,7 @@ export default async function Page() {
     depth: 2 // Required to populate the images inside the resultsHighlight array
   })
 
-  const contactData = await payload.findGlobal({ slug: 'contact-us' })
+  const contactData = await payload.findGlobal({ slug: 'contact-page' })
   const testimonials = await payload.find({ collection: 'testimonials', limit: 10 })
 
   // Extract the specific field that maps to your DB table 'home_page_results_highlight'

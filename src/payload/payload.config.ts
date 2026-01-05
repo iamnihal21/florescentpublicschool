@@ -9,8 +9,13 @@ import Media  from './collections/Media'
 import { Testimonials } from './collections/Testimonials'
 import { Home } from './globals/Home'
 import { AboutPage } from './globals/AboutPage'
-import { ContactUs } from './globals/Contacts'
+import { ContactPage } from './globals/Contacts'
 import { AchievementsPage } from './globals/Achievements'
+import { AcademicsPage } from './globals/AcademicsPage'
+import { Gallery } from './collections/Gallery'
+import { AdmissionPage } from './globals/AdmissionPage'
+import { Jobs } from './collections/Jobs'
+import { CareerPage } from './globals/CareerPage'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -23,8 +28,10 @@ export default buildConfig({
     { slug: 'users', auth: true, fields: [] },
     Media,
     Testimonials,
+    Gallery,
+    Jobs
   ],
-  globals: [Home,AboutPage,ContactUs,AchievementsPage],
+  globals: [Home,AboutPage,ContactPage,AchievementsPage,AcademicsPage,AdmissionPage,CareerPage],
   editor: lexicalEditor({}),
   secret: process.env.PAYLOAD_SECRET || '726d7f73873bff8db79de76eb067bad204c2ec494ef95e52824b132622d69e91',
   db: postgresAdapter({

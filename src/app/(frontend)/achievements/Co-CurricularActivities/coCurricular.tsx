@@ -61,6 +61,19 @@ export default function CoCurricularView({ data }: { data: CoCurricularData }) {
           </p>
         </motion.div>
 
+        <div className="relative md:mt-20 mb-30">
+          <div className="absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent -translate-y-1/2"></div>
+          <div className="relative flex justify-center">
+            <div className="bg-background px-8 py-3 border border-border/50 rounded-full shadow-lg">
+              <span className="text-base font-medium text-foreground flex items-center gap-2">
+                <span className="text-primary">✦</span>
+                Guiding Florescent Since
+                <span className="text-primary">✦</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
         {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Column: Event List */}

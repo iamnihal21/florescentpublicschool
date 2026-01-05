@@ -33,17 +33,10 @@ const menuData: MenuItem[] = [
   {
     label: 'Admission',
     href: '/admissions/',
-    // submenu: [
-    //   { label: "Application procedure",  },
-    // ]
   },
   {
     label: 'Career',
-    href: '/career/currentOpenings',
-    // submenu: [
-    //   { label: "Current Openings", href: "/career/currentOpenings" },
-    //   // { label: "Carrer Growth", href: "/career/showcaseOpportunities" },
-    // ]
+    href: '/career',
   },
   { label: 'Contact Us', href: '/contact-us' },
 ]

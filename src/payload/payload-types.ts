@@ -70,6 +70,8 @@ export interface Config {
     users: User;
     media: Media;
     testimonials: Testimonial;
+    gallery: Gallery;
+    jobs: Job;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -80,6 +82,8 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    gallery: GallerySelect<false> | GallerySelect<true>;
+    jobs: JobsSelect<false> | JobsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -92,14 +96,20 @@ export interface Config {
   globals: {
     'home-page': HomePage;
     'about-page': AboutPage;
-    'contact-us': ContactUs;
+    'contact-page': ContactPage;
     'achievements-page': AchievementsPage;
+    'academics-page': AcademicsPage;
+    'admission-page': AdmissionPage;
+    'career-page': CareerPage;
   };
   globalsSelect: {
     'home-page': HomePageSelect<false> | HomePageSelect<true>;
     'about-page': AboutPageSelect<false> | AboutPageSelect<true>;
-    'contact-us': ContactUsSelect<false> | ContactUsSelect<true>;
+    'contact-page': ContactPageSelect<false> | ContactPageSelect<true>;
     'achievements-page': AchievementsPageSelect<false> | AchievementsPageSelect<true>;
+    'academics-page': AcademicsPageSelect<false> | AcademicsPageSelect<true>;
+    'admission-page': AdmissionPageSelect<false> | AdmissionPageSelect<true>;
+    'career-page': CareerPageSelect<false> | CareerPageSelect<true>;
   };
   locale: null;
   user: User & {
@@ -196,6 +206,41 @@ export interface Testimonial {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery".
+ */
+export interface Gallery {
+  id: number;
+  title: string;
+  description?: string | null;
+  category: 'sports' | 'arts' | 'academic' | 'campus' | 'events';
+  image: number | Media;
+  date?: string | null;
+  featured?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "jobs".
+ */
+export interface Job {
+  id: number;
+  title: string;
+  department: 'academic' | 'admin' | 'support' | 'specialized';
+  location?: string | null;
+  type?: ('full-time' | 'part-time' | 'contract') | null;
+  requirements?:
+    | {
+        point?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  active?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -229,6 +274,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'testimonials';
         value: number | Testimonial;
+      } | null)
+    | ({
+        relationTo: 'gallery';
+        value: number | Gallery;
+      } | null)
+    | ({
+        relationTo: 'jobs';
+        value: number | Job;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -335,6 +388,39 @@ export interface TestimonialsSelect<T extends boolean = true> {
   author?: T;
   role?: T;
   image?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery_select".
+ */
+export interface GallerySelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  category?: T;
+  image?: T;
+  date?: T;
+  featured?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "jobs_select".
+ */
+export interface JobsSelect<T extends boolean = true> {
+  title?: T;
+  department?: T;
+  location?: T;
+  type?: T;
+  requirements?:
+    | T
+    | {
+        point?: T;
+        id?: T;
+      };
+  active?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -454,24 +540,53 @@ export interface AboutPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "contact-us".
+ * via the `definition` "contact-page".
  */
-export interface ContactUs {
+export interface ContactPage {
   id: number;
-  schoolAddress: {
-    street: string;
-    city: string;
+  hero?: {
+    title?: string | null;
+    subtitle?: string | null;
   };
-  primaryContact: {
-    phone: string;
-    email: string;
+  mainInfo?: {
+    emails?:
+      | {
+          email?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    address?: string | null;
+    supportHours?:
+      | {
+          day?: string | null;
+          hours?: string | null;
+          id?: string | null;
+        }[]
+      | null;
   };
-  locationInfo: {
-    mapEmbedUrl: string;
-  };
-  responseTime?: {
-    admissionResponse?: string | null;
-  };
+  contactNumbers?:
+    | {
+        department?: string | null;
+        number?: string | null;
+        ext?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  emergencyContacts?:
+    | {
+        type?: string | null;
+        number?: string | null;
+        person?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  transportation?:
+    | {
+        method?: string | null;
+        details?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -566,6 +681,122 @@ export interface AchievementsPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "academics-page".
+ */
+export interface AcademicsPage {
+  id: number;
+  hero: {
+    title: string;
+    subtitle?: string | null;
+  };
+  examSchedules?:
+    | {
+        term: string;
+        date: string;
+        classes: string;
+        status?: ('Upcoming' | 'Ongoing' | 'Completed') | null;
+        id?: string | null;
+      }[]
+    | null;
+  upcomingEvents?:
+    | {
+        title: string;
+        date: string;
+        time: string;
+        venue: string;
+        category?: string | null;
+        participants?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  ptmSchedules?:
+    | {
+        classes: string;
+        date: string;
+        time: string;
+        venue: string;
+        type?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "admission-page".
+ */
+export interface AdmissionPage {
+  id: number;
+  welcomeSection: {
+    title: string;
+    subtitle?: string | null;
+    image: number | Media;
+  };
+  admissionProcess?: {
+    title?: string | null;
+    steps?:
+      | {
+          stepNumber: number;
+          title: string;
+          description?: string | null;
+          duration?: string | null;
+          iconName?: string | null;
+          details?:
+            | {
+                item?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  whyChooseUs?: {
+    title?: string | null;
+    stats?:
+      | {
+          label: string;
+          value: string;
+          iconName?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    features?:
+      | {
+          iconName?: string | null;
+          title: string;
+          description: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "career-page".
+ */
+export interface CareerPage {
+  id: number;
+  hero?: {
+    title?: string | null;
+    description?: string | null;
+  };
+  benefits?:
+    | {
+        iconName?: string | null;
+        title?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home-page_select".
  */
 export interface HomePageSelect<T extends boolean = true> {
@@ -640,30 +871,55 @@ export interface AboutPageSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "contact-us_select".
+ * via the `definition` "contact-page_select".
  */
-export interface ContactUsSelect<T extends boolean = true> {
-  schoolAddress?:
+export interface ContactPageSelect<T extends boolean = true> {
+  hero?:
     | T
     | {
-        street?: T;
-        city?: T;
+        title?: T;
+        subtitle?: T;
       };
-  primaryContact?:
+  mainInfo?:
     | T
     | {
-        phone?: T;
-        email?: T;
+        emails?:
+          | T
+          | {
+              email?: T;
+              id?: T;
+            };
+        address?: T;
+        supportHours?:
+          | T
+          | {
+              day?: T;
+              hours?: T;
+              id?: T;
+            };
       };
-  locationInfo?:
+  contactNumbers?:
     | T
     | {
-        mapEmbedUrl?: T;
+        department?: T;
+        number?: T;
+        ext?: T;
+        id?: T;
       };
-  responseTime?:
+  emergencyContacts?:
     | T
     | {
-        admissionResponse?: T;
+        type?: T;
+        number?: T;
+        person?: T;
+        id?: T;
+      };
+  transportation?:
+    | T
+    | {
+        method?: T;
+        details?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -761,6 +1017,132 @@ export interface AchievementsPageSelect<T extends boolean = true> {
                   };
               id?: T;
             };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "academics-page_select".
+ */
+export interface AcademicsPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+      };
+  examSchedules?:
+    | T
+    | {
+        term?: T;
+        date?: T;
+        classes?: T;
+        status?: T;
+        id?: T;
+      };
+  upcomingEvents?:
+    | T
+    | {
+        title?: T;
+        date?: T;
+        time?: T;
+        venue?: T;
+        category?: T;
+        participants?: T;
+        id?: T;
+      };
+  ptmSchedules?:
+    | T
+    | {
+        classes?: T;
+        date?: T;
+        time?: T;
+        venue?: T;
+        type?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "admission-page_select".
+ */
+export interface AdmissionPageSelect<T extends boolean = true> {
+  welcomeSection?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        image?: T;
+      };
+  admissionProcess?:
+    | T
+    | {
+        title?: T;
+        steps?:
+          | T
+          | {
+              stepNumber?: T;
+              title?: T;
+              description?: T;
+              duration?: T;
+              iconName?: T;
+              details?:
+                | T
+                | {
+                    item?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+      };
+  whyChooseUs?:
+    | T
+    | {
+        title?: T;
+        stats?:
+          | T
+          | {
+              label?: T;
+              value?: T;
+              iconName?: T;
+              id?: T;
+            };
+        features?:
+          | T
+          | {
+              iconName?: T;
+              title?: T;
+              description?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "career-page_select".
+ */
+export interface CareerPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  benefits?:
+    | T
+    | {
+        iconName?: T;
+        title?: T;
+        description?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;
