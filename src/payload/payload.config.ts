@@ -16,7 +16,9 @@ import { Gallery } from './collections/Gallery'
 import { AdmissionPage } from './globals/AdmissionPage'
 import { Jobs } from './collections/Jobs'
 import { CareerPage } from './globals/CareerPage'
-
+import { s } from 'framer-motion/client'
+import { ScholarshipPage } from './globals/ScholarshipPage'
+import { Scholarships } from './collections/Scholarships'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -29,9 +31,10 @@ export default buildConfig({
     Media,
     Testimonials,
     Gallery,
-    Jobs
+    Jobs,
+    Scholarships,
   ],
-  globals: [Home,AboutPage,ContactPage,AchievementsPage,AcademicsPage,AdmissionPage,CareerPage],
+  globals: [Home,AboutPage,ContactPage,AchievementsPage,AcademicsPage,AdmissionPage,CareerPage, ScholarshipPage ],
   editor: lexicalEditor({}),
   secret: process.env.PAYLOAD_SECRET || '726d7f73873bff8db79de76eb067bad204c2ec494ef95e52824b132622d69e91',
   db: postgresAdapter({

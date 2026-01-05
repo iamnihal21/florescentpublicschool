@@ -1,5 +1,4 @@
 
-import { Facebook, Twitter, Instagram, Linkedin, Youtube, Mail, Phone, MapPin } from "lucide-react"
 import Image from "next/image"
 
 export function FAQ() {

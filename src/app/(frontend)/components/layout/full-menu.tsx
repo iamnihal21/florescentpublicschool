@@ -31,14 +31,14 @@ const menuData: MenuItem[] = [
     label: 'About Us', href: '/about',
   },
   {
-    label: 'Admission',
-    href: '/admissions/',
+    label: 'Admission',href: '/admissions/',
   },
   {
     label: 'Career',
     href: '/career',
   },
   { label: 'Contact Us', href: '/contact-us' },
+  { label: 'Scholarship', href: '/scholership' },
 ]
 
 interface FullMenuProps {

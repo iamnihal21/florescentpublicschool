@@ -33,7 +33,7 @@ export default function AcademicsView({ data }: { data: AcademicsData }) {
             <div className="bg-background px-8 py-3 border border-border/50 rounded-full shadow-lg">
               <span className="text-base font-medium text-foreground flex items-center gap-2">
                 <span className="text-primary">✦</span>
-                Guiding Florescent Since
+                Structuring Success Every Day
                 <span className="text-primary">✦</span>
               </span>
             </div>

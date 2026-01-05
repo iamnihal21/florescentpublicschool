@@ -1,38 +1,3 @@
-// 'use client'
-
-// import { useRef } from 'react'
-// import { useScroll } from 'framer-motion'
-// import { HomePage } from '@/payload/payload-types'
-// import { ContentCard } from './content-section-client'
-
-// type Card = NonNullable<HomePage['scrollCards']>[number]
-
-// export function ContentSectionClient({ cards }: { cards: Card[] }) {
-//   const containerRef = useRef<HTMLDivElement>(null)
-
-//   const { scrollYProgress } = useScroll({
-//     target: containerRef,
-//     offset: ['start start', 'end end'],
-//   })
-
-//   return (
-//     <section ref={containerRef} className="relative h-[400vh] bg-background">
-//       <div className="sticky top-0 h-screen">
-//         <div className="grid grid-cols-1 lg:grid-cols-2 h-full relative">
-//           {cards.map((card, index) => (
-//             <ContentCard
-//               key={index}
-//               card={card}
-//               index={index}
-//               total={cards.length}
-//               scrollYProgress={scrollYProgress}
-//             />
-//           ))}
-//         </div>
-//       </div>
-//     </section>
-//   )
-// }
 
 import { getPayloadClient } from '@/app/(frontend)/lib/payload-client'
 import { ContentSectionClient } from './content-section-client'

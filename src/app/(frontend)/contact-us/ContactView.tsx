@@ -56,6 +56,19 @@ export default function ContactView({ data }: { data: ContactData }) {
             <div className="w-24 h-1 bg-chart-1 mx-auto"></div>
           </motion.div>
         </div>
+
+        <div className="relative md:mt-20 mb-30">
+          <div className="absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent -translate-y-1/2"></div>
+          <div className="relative flex justify-center">
+            <div className="bg-background px-8 py-3 border border-border/50 rounded-full shadow-lg">
+              <span className="text-base font-medium text-foreground flex items-center gap-2">
+                <span className="text-primary">✦</span>
+                Here To Guide You Forward
+                <span className="text-primary">✦</span>
+              </span>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Main Content Grid */}

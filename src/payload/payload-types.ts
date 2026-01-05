@@ -72,6 +72,7 @@ export interface Config {
     testimonials: Testimonial;
     gallery: Gallery;
     jobs: Job;
+    scholarships: Scholarship;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +85,7 @@ export interface Config {
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     gallery: GallerySelect<false> | GallerySelect<true>;
     jobs: JobsSelect<false> | JobsSelect<true>;
+    scholarships: ScholarshipsSelect<false> | ScholarshipsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -101,6 +103,7 @@ export interface Config {
     'academics-page': AcademicsPage;
     'admission-page': AdmissionPage;
     'career-page': CareerPage;
+    'scholarship-page': ScholarshipPage;
   };
   globalsSelect: {
     'home-page': HomePageSelect<false> | HomePageSelect<true>;
@@ -110,6 +113,7 @@ export interface Config {
     'academics-page': AcademicsPageSelect<false> | AcademicsPageSelect<true>;
     'admission-page': AdmissionPageSelect<false> | AdmissionPageSelect<true>;
     'career-page': CareerPageSelect<false> | CareerPageSelect<true>;
+    'scholarship-page': ScholarshipPageSelect<false> | ScholarshipPageSelect<true>;
   };
   locale: null;
   user: User & {
@@ -241,6 +245,21 @@ export interface Job {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "scholarships".
+ */
+export interface Scholarship {
+  id: number;
+  title: string;
+  category: 'rank' | 'percentage' | 'board';
+  standards: string;
+  reward: string;
+  criteria?: string | null;
+  iconName?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -282,6 +301,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'jobs';
         value: number | Job;
+      } | null)
+    | ({
+        relationTo: 'scholarships';
+        value: number | Scholarship;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -421,6 +444,20 @@ export interface JobsSelect<T extends boolean = true> {
         id?: T;
       };
   active?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "scholarships_select".
+ */
+export interface ScholarshipsSelect<T extends boolean = true> {
+  title?: T;
+  category?: T;
+  standards?: T;
+  reward?: T;
+  criteria?: T;
+  iconName?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -815,6 +852,34 @@ export interface CareerPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "scholarship-page".
+ */
+export interface ScholarshipPage {
+  id: number;
+  hero?: {
+    title?: string | null;
+    description?: string | null;
+  };
+  scholarships?:
+    | {
+        standardRange?: string | null;
+        criteria?: string | null;
+        reward?: string | null;
+        iconName?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  conditions?:
+    | {
+        rule?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home-page_select".
  */
 export interface HomePageSelect<T extends boolean = true> {
@@ -1185,6 +1250,36 @@ export interface CareerPageSelect<T extends boolean = true> {
         iconName?: T;
         title?: T;
         description?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "scholarship-page_select".
+ */
+export interface ScholarshipPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  scholarships?:
+    | T
+    | {
+        standardRange?: T;
+        criteria?: T;
+        reward?: T;
+        iconName?: T;
+        id?: T;
+      };
+  conditions?:
+    | T
+    | {
+        rule?: T;
         id?: T;
       };
   updatedAt?: T;

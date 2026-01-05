@@ -86,7 +86,6 @@ export const Home: GlobalConfig = {
         },
       ],
     },
-    // --- MAPS SECTION FIELDS ADDED BELOW ---
     {
       name: 'contactUs', // This matches the key used in your component prop
       type: 'group',

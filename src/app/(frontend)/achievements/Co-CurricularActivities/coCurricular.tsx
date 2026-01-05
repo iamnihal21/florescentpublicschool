@@ -67,7 +67,7 @@ export default function CoCurricularView({ data }: { data: CoCurricularData }) {
             <div className="bg-background px-8 py-3 border border-border/50 rounded-full shadow-lg">
               <span className="text-base font-medium text-foreground flex items-center gap-2">
                 <span className="text-primary">✦</span>
-                Guiding Florescent Since
+                Beyond Classroom Boundaries
                 <span className="text-primary">✦</span>
               </span>
             </div>

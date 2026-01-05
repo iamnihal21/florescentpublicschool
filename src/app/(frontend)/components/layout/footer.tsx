@@ -2,28 +2,9 @@
 
 import { Facebook, Twitter, Instagram, Linkedin, Youtube, Mail, Phone, MapPin } from "lucide-react"
 import Link from "next/link"
-import Image from "next/image"
 import { motion } from "framer-motion"
 
 export function Footer() {
-  const faqs = [
-    {
-      question: "What are the admission requirements?",
-      answer: "Strong academic record, entrance exam, teacher recommendations, and personal interview.",
-    },
-    {
-      question: "When is the application deadline?",
-      answer: "Applications for Fall enrollment are due by January 15th each year.",
-    },
-    {
-      question: "Do you offer financial aid?",
-      answer: "Yes, we offer need-based financial aid and merit scholarships to qualified students.",
-    },
-    {
-      question: "What is the student-teacher ratio?",
-      answer: "We maintain a 10:1 student-teacher ratio to ensure personalized attention.",
-    },
-  ]
 
   // Reusable fade-up animation
   const fadeUp = {
@@ -82,7 +63,7 @@ export function Footer() {
           >
             <h3 className="text-xl font-bold mb-4">Quick Links</h3>
             <nav className="flex flex-col space-y-3">
-              {["About", "Admissions", "Academics", "Student Life", "Contact"].map((item, i) => (
+              {["A  bout", "Admissions", "Academics", "Student Life", "Contact"].map((item, i) => (
                 <motion.div
                   key={i}
                   variants={fadeUp}
