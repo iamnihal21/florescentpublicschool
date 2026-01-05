@@ -1,20 +1,20 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ContactUs } from "@/payload/payload-types" // Import the generated type
+import { HomePage } from "@/payload/payload-types"
 
 interface MapsSectionProps {
-  contactInfo: ContactUs // This matches the type from your payload-types.ts
+  // We extract the 'contactUs' group from the Home global type
+  contactInfo: HomePage['contactUs'] 
 }
 
 export function MapsSection({ contactInfo }: MapsSectionProps) {
-  // Extract data from the contactInfo prop with fallbacks
-  const address = contactInfo?.schoolAddress || {
-    street: "3700 Coldwater Canyon Ave",
-    city: "Studio City, CA 91604"
-  }
+  // Extracting data with safe fallbacks to your original static values
+  const street = contactInfo?.schoolAddress?.street || "3700 Coldwater Canyon Ave"
+  const city = contactInfo?.schoolAddress?.city || "Studio City, CA 91604"
   const phone = contactInfo?.primaryContact?.phone || "(818) 487-6600"
-  const mapUrl = contactInfo?.locationInfo?.mapEmbedUrl || "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3671.026315496377!2d72.52242187!3d23.05949679!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e835519d27f37%3A0xa903dd3f424f9a0f!2sFlorescent%20school!5e0!3m2!1sen!2sin!4v1767283150067!5m2!1sen!2sin"
+  const mapUrl = contactInfo?.locationInfo?.mapEmbedUrl || "https://www.google.com/maps/embed?pb=..."
+  const response = contactInfo?.responseTime?.admissionResponse || "24-48 Hours"
 
   return (
     <section className="py-16 bg-background">
@@ -36,7 +36,7 @@ export function MapsSection({ contactInfo }: MapsSectionProps) {
 
           {/* Map - Using Dynamic URL from Payload */}
           <motion.div
-            className="relative w-full h-[500px] rounded-lg overflow-hidden shadow-lg border border-border"
+            className="relative w-full h-[500px] rounded-2xl overflow-hidden shadow-lg border border-border"
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7 }}
@@ -51,6 +51,7 @@ export function MapsSection({ contactInfo }: MapsSectionProps) {
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               title="School Location Map"
+              className="grayscale hover:grayscale-0 transition-all duration-700"
             />
           </motion.div>
 
@@ -61,9 +62,9 @@ export function MapsSection({ contactInfo }: MapsSectionProps) {
                 title: "Address",
                 content: (
                   <>
-                    {address.street}
+                    {street}
                     <br />
-                    {address.city}
+                    {city}
                   </>
                 )
               },
@@ -73,19 +74,19 @@ export function MapsSection({ contactInfo }: MapsSectionProps) {
               },
               {
                 title: "Response Time",
-                content: contactInfo?.responseTime?.admissionResponse || "24-48 Hours"
+                content: response
               }
             ].map((item, index) => (
               <motion.div
                 key={index}
-                className="p-6 bg-card rounded-lg border border-border"
+                className="p-8 bg-card rounded-2xl border border-border hover:shadow-md transition-shadow"
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.15 }}
                 viewport={{ once: true }}
               >
-                <h3 className="font-semibold text-foreground mb-2">{item.title}</h3>
-                <div className="text-muted-foreground">{item.content}</div>
+                <h3 className="font-bold text-lg text-foreground mb-2">{item.title}</h3>
+                <div className="text-muted-foreground leading-relaxed">{item.content}</div>
               </motion.div>
             ))}
           </div>
@@ -94,5 +95,3 @@ export function MapsSection({ contactInfo }: MapsSectionProps) {
     </section>
   )
 }
-
-

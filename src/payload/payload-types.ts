@@ -502,6 +502,24 @@ export interface HomePage {
         id?: string | null;
       }[]
     | null;
+  contactUs: {
+    schoolAddress: {
+      street: string;
+      city: string;
+    };
+    primaryContact: {
+      phone: string;
+    };
+    locationInfo: {
+      /**
+       * Paste the "src" URL from the Google Maps iframe embed code.
+       */
+      mapEmbedUrl: string;
+    };
+    responseTime?: {
+      admissionResponse?: string | null;
+    };
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -831,6 +849,31 @@ export interface HomePageSelect<T extends boolean = true> {
               id?: T;
             };
         id?: T;
+      };
+  contactUs?:
+    | T
+    | {
+        schoolAddress?:
+          | T
+          | {
+              street?: T;
+              city?: T;
+            };
+        primaryContact?:
+          | T
+          | {
+              phone?: T;
+            };
+        locationInfo?:
+          | T
+          | {
+              mapEmbedUrl?: T;
+            };
+        responseTime?:
+          | T
+          | {
+              admissionResponse?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
