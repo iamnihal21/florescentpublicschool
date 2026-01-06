@@ -80,9 +80,9 @@ export default function ScholarshipView({
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="bg-muted/30 border border-border rounded-3xl p-8 md:p-12"
+            className="bg-muted/30 border border-border rounded-3xl p-8 md:p-12 mb-10"
           >
-            <div className="flex items-center gap-4 mb-8">
+            <div className="flex items-center gap-4">
               <LucideIcons.ShieldCheck className="w-8 h-8 text-primary" />
               <h2 className="text-3xl font-bold text-foreground">Terms & Conditions</h2>
             </div>

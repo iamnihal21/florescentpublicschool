@@ -57,7 +57,7 @@ export default function ContactView({ data }: { data: ContactData }) {
           </motion.div>
         </div>
 
-        <div className="relative md:mt-20 mb-30">
+        <div className="relative md:mt-20 mt-10">
           <div className="absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent -translate-y-1/2"></div>
           <div className="relative flex justify-center">
             <div className="bg-background px-8 py-3 border border-border/50 rounded-full shadow-lg">

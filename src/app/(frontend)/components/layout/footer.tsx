@@ -15,7 +15,6 @@ export function Footer() {
   return (
     <footer className="bg-charcoal text-white border border-black">
       
-
       {/* --------------------- Contact & Social Links --------------------- */}
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-3 gap-12">
@@ -32,21 +31,21 @@ export function Footer() {
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-primary mt-1" />
                 <p className="text-gray-400 leading-relaxed">
-                  3700 Coldwater Canyon Ave
+                  Nr. Cambay Hotel, S.G. Highway Road,
                   <br />
-                  Studio City, CA 91604
+                  Thaltej, Ahmedabad-380 054.
                 </p>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-primary" />
                 <a href="tel:+18189801234" className="text-gray-400 hover:text-primary transition-colors">
-                  (818) 980-1234
+                  9724896330
                 </a>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-primary" />
                 <a href="mailto:admissions@hw.com" className="text-gray-400 hover:text-primary transition-colors">
-                  admissions@hw.com
+                  info@florescentpublicschool.org
                 </a>
               </div>
             </div>
@@ -63,7 +62,7 @@ export function Footer() {
           >
             <h3 className="text-xl font-bold mb-4">Quick Links</h3>
             <nav className="flex flex-col space-y-3">
-              {["A  bout", "Admissions", "Academics", "Student Life", "Contact"].map((item, i) => (
+              {["About", "Admissions", "Academics", "Student Life", "Contact"].map((item, i) => (
                 <motion.div
                   key={i}
                   variants={fadeUp}

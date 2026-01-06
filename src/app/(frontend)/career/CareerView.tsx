@@ -43,7 +43,7 @@ export default function CareerView({ staticData, jobs }: { staticData: CareerDat
       </div>
 
       {/* Benefits Section */}
-      <section className="py-20 border-y border-border">
+      <section className="">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {staticData.benefits?.map((benefit, i) => {
