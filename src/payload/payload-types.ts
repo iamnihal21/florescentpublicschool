@@ -576,6 +576,10 @@ export interface AboutPage {
         name: string;
         role: string;
         image: number | Media;
+        /**
+         * Brief professional introduction/background of the leader
+         */
+        introduction: string;
         message: string;
         gradient?:
           | ('from-amber-500 to-orange-500' | 'from-purple-500 to-pink-500' | 'from-blue-500 to-cyan-500')
@@ -664,9 +668,6 @@ export interface AchievementsPage {
       | null;
     results?:
       | {
-          year: string;
-          label: string;
-          percentage: number;
           image: number | Media;
           id?: string | null;
         }[]
@@ -821,7 +822,6 @@ export interface AdmissionPage {
       | {
           iconName?: string | null;
           title: string;
-          description: string;
           id?: string | null;
         }[]
       | null;
@@ -962,6 +962,7 @@ export interface AboutPageSelect<T extends boolean = true> {
         name?: T;
         role?: T;
         image?: T;
+        introduction?: T;
         message?: T;
         gradient?: T;
         achievements?:
@@ -1054,9 +1055,6 @@ export interface AchievementsPageSelect<T extends boolean = true> {
         results?:
           | T
           | {
-              year?: T;
-              label?: T;
-              percentage?: T;
               image?: T;
               id?: T;
             };
@@ -1225,7 +1223,6 @@ export interface AdmissionPageSelect<T extends boolean = true> {
           | {
               iconName?: T;
               title?: T;
-              description?: T;
               id?: T;
             };
       };

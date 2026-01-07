@@ -1,4 +1,4 @@
-import { getPayloadClient } from '@/app/(frontend)/lib/payload-client'
+import { getPayloadClient } from '@/app/(frontend)/lib/payload-clinet'
 import { HeroSlider } from '@/app/(frontend)/components/home/hero-slider'
 import { ContentSectionClient } from '@/app/(frontend)/components/home/content-section-client'
 import { TestimonialsSlider } from '@/app/(frontend)/components/home/testimonials-slider'

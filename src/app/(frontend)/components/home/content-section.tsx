@@ -1,5 +1,5 @@
 
-import { getPayloadClient } from '@/app/(frontend)/lib/payload-client'
+import { getPayloadClient } from '@/app/(frontend)/lib/payload-clinet'
 import { ContentSectionClient } from './content-section-client'
 import { HomePage } from '@/payload/payload-types'
 

@@ -4,8 +4,8 @@ import { motion } from "framer-motion"
 import { useState } from "react"
 import {
   Phone, Mail, MapPin, Clock, Send,
-  MessageSquare, Users, AlertTriangle,
-  Shield, Heart, Calendar
+  MessageSquare, AlertTriangle,
+  Heart,
 } from "lucide-react"
 import { ContactPage as ContactData } from "@/payload/payload-types"
 

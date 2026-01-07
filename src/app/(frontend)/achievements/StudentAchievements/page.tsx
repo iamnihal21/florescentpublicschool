@@ -1,6 +1,8 @@
 import { getPayload } from 'payload'
 import config from '@/payload/payload.config'
-import StudentView from './studentAch' // Ensure the filename matches your UI component
+import StudentView from './StudentMainUI' // Ensure the filename matches your UI component
+import { Suspense } from 'react'
+import StudentSkeleton from './StudentSkeleton'
 
 export default async function AchievementsLandingPage() {
   const payload = await getPayload({ config })
@@ -21,8 +23,9 @@ export default async function AchievementsLandingPage() {
 
   return (
     <main>
-      {/* Rendering the Redesigned Modern UI */}
-      <StudentView students={formattedStudents} />
+      <Suspense fallback={<StudentSkeleton />}>
+        <StudentView students={formattedStudents} />
+      </Suspense>
     </main>
   )
 }

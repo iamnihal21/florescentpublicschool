@@ -25,7 +25,7 @@ export function Header() {
   /* ---------- STYLE LOGIC ---------- */
 
   const headerBg = scrolled
-    ? 'bg-black/70 backdrop-blur-md shadow-lg'
+    ? 'bg-gray-700/70 backdrop-blur-md '
     : isHomePage
       ? 'bg-transparent'
       : 'bg-white shadow-sm'
@@ -74,7 +74,7 @@ export function Header() {
             </Button>
 
             {/* Payment */}
-            <Button
+            {/* <Button
               variant="ghost"
               className={`
     p-2 font-semibold text-sm md:text-lg tracking-wide h-auto
@@ -83,7 +83,7 @@ export function Header() {
   `}
             >
               Payment
-            </Button>
+            </Button> */}
 
             {/* Menu */}
             <Button variant="ghost" onClick={() => setIsMenuOpen(true)} className={`${textColor}  hover:bg-yellow-100 hover:text-black`}>

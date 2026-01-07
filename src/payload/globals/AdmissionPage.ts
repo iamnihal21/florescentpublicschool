@@ -62,7 +62,6 @@ export const AdmissionPage: GlobalConfig = {
           fields: [
             { name: 'iconName', type: 'text' },
             { name: 'title', type: 'text', required: true },
-            { name: 'description', type: 'textarea', required: true },
           ]
         }
       ]

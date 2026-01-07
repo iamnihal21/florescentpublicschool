@@ -64,29 +64,6 @@ export const AchievementsPage: GlobalConfig = {
           },
           fields: [
             {
-              name: 'year',
-              type: 'text',
-              label: 'Academic Year',
-              required: true,
-              admin: { placeholder: 'e.g., 2023-24' },
-            },
-            {
-              name: 'label',
-              type: 'text',
-              label: 'Display Label',
-              defaultValue: 'Overall Result',
-              required: true,
-              admin: { placeholder: 'e.g., Class 10th Board' },
-            },
-            {
-              name: 'percentage',
-              type: 'number',
-              label: 'Percentage Score',
-              required: true,
-              min: 0,
-              max: 100,
-            },
-            {
               name: 'image',
               type: 'upload',
               relationTo: 'media',

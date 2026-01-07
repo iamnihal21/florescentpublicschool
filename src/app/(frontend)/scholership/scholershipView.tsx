@@ -27,7 +27,7 @@ export default function ScholarshipView({
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-foreground">
               {data.hero?.title}
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+            <p className="text-lg md:text-xl text-secondary leading-relaxed">
               {data.hero?.description}
             </p>
           </motion.div>

@@ -1,15 +1,33 @@
+import { Suspense } from 'react'
 import { getPayload } from 'payload'
 import config from '@/payload/payload.config'
-import CareerView from './CareerView'
+import CareerMainUI from './CareerMainUI'
+import CareerSkeleton from './CareerSkeleton'
 
-export default async function Page() {
+export default async function CareerPage() {
+  return (
+    <main className="min-h-screen bg-background">
+      <Suspense fallback={<CareerSkeleton />}>
+        <CareerDataFetcher />
+      </Suspense>
+    </main>
+  )
+}
+
+async function CareerDataFetcher() {
   const payload = await getPayload({ config })
   
-  const staticData = await payload.findGlobal({ slug: 'career-page' })
-  const { docs: jobs } = await payload.find({
-    collection: 'jobs',
-    where: { active: { equals: true } }
-  })
+  // Fetching both the static page content and the dynamic job listings
+  const [staticData, jobsResponse] = await Promise.all([
+    payload.findGlobal({ slug: 'career-page' }),
+    payload.find({
+      collection: 'jobs',
+      where: {
+        active: { equals: true }
+      },
+      limit: 100,
+    })
+  ])
 
-  return <CareerView staticData={staticData} jobs={jobs} />
+  return <CareerMainUI staticData={staticData} jobs={jobsResponse.docs} />
 }

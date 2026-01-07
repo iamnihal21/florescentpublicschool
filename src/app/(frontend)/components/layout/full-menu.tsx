@@ -686,3 +686,183 @@ export function FullMenu({ isOpen, onClose }: FullMenuProps) {
     </AnimatePresence>
   )
 }
+
+
+// 'use client'
+
+// import { useState, useEffect } from 'react'
+// import { useRouter } from 'next/navigation'
+// import { ChevronRight, ChevronLeft, X } from 'lucide-react'
+// import { Button } from '../../../../../public/UI/button'
+// import { Input } from '@/app/(frontend)/ui/input'
+// import { ScrollArea } from '@/app/(frontend)/ui/scroll-area'
+// import { motion, AnimatePresence } from 'framer-motion'
+
+// interface MenuItem {
+//   label: string
+//   href?: string
+//   submenu?: MenuItem[]
+// }
+
+// const menuData: MenuItem[] = [
+//   { label: 'Home', href: '/' },
+//   { label: 'Schedules', href: '/schedules' },
+//   { label: 'Gallery', href: '/gallery' },
+//   {
+//     label: 'Achievements & Activities',
+//     submenu: [
+//       { label: 'Student Achievements', href: '/achievements/StudentAchievements' },
+//       { label: 'School Achievements', href: '/achievements/SchoolAchievements' },
+//       { label: 'Co-Curricular Activities', href: '/achievements/Co-CurricularActivities' },
+//       { label: 'Previous Year results', href: '/achievements/PreviousYearResults' },
+//     ],
+//   },
+//   { label: 'About Us', href: '/about' },
+//   { label: 'Admission', href: '/admissions/' },
+//   { label: 'Career', href: '/career' },
+//   { label: 'Contact Us', href: '/contact-us' },
+//   { label: 'Scholarship', href: '/scholership' },
+// ]
+
+// interface FullMenuProps {
+//   isOpen: boolean
+//   onClose: () => void
+// }
+
+// export function FullMenu({ isOpen, onClose }: FullMenuProps) {
+//   const router = useRouter()
+
+//   const [searchQuery, setSearchQuery] = useState('')
+//   const [activeSubmenu, setActiveSubmenu] = useState<MenuItem | null>(null)
+//   const [activeTertiaryMenu, setActiveTertiaryMenu] = useState<MenuItem | null>(null)
+//   const [isMobile, setIsMobile] = useState(false)
+
+//   // ✅ Prefetch all routes when menu opens
+//   useEffect(() => {
+//     if (!isOpen) return
+
+//     menuData.forEach((item) => {
+//       if (item.href) router.prefetch(item.href)
+//       item.submenu?.forEach((sub) => {
+//         if (sub.href) router.prefetch(sub.href)
+//         sub.submenu?.forEach((deep) => {
+//           if (deep.href) router.prefetch(deep.href)
+//         })
+//       })
+//     })
+//   }, [isOpen, router])
+
+//   // Screen size detection
+//   useEffect(() => {
+//     const checkMobile = () => setIsMobile(window.innerWidth < 768)
+//     checkMobile()
+//     window.addEventListener('resize', checkMobile)
+//     return () => window.removeEventListener('resize', checkMobile)
+//   }, [])
+
+//   const navigate = (href?: string) => {
+//     if (!href) return
+//     router.push(href)
+//     setActiveSubmenu(null)
+//     setActiveTertiaryMenu(null)
+//     onClose()
+//   }
+
+//   return (
+//     <AnimatePresence>
+//       {isOpen && (
+//         <motion.div
+//           initial={{ opacity: 0 }}
+//           animate={{ opacity: 1 }}
+//           exit={{ opacity: 0 }}
+//           className="fixed inset-0 z-50 bg-background overflow-hidden"
+//         >
+//           {/* Top Bar */}
+//           <div className="absolute top-0 left-0 right-0 h-[72px] flex justify-end items-center px-6 border-b bg-background/80 backdrop-blur">
+//             <Button onClick={onClose} variant="ghost" size="icon">
+//               <X />
+//             </Button>
+//           </div>
+
+//           <div className="h-full pt-[72px] flex">
+//             <ScrollArea className="w-full md:w-[420px] border-r bg-background/80 backdrop-blur">
+//               <div className="p-8 space-y-2">
+//                 <div className="relative mb-6">
+//                   <Input
+//                     placeholder="Search"
+//                     value={searchQuery}
+//                     onChange={(e) => setSearchQuery(e.target.value)}
+//                     className="pl-8 border-b rounded-none bg-transparent"
+//                   />
+//                 </div>
+
+//                 {menuData.map((item, i) => (
+//                   <motion.div
+//                     key={item.label}
+//                     initial={{ opacity: 0, x: -20 }}
+//                     animate={{ opacity: 1, x: 0 }}
+//                     transition={{ delay: i * 0.05 }}
+//                   >
+//                     {item.href ? (
+//                       <Button
+//                         variant="ghost"
+//                         className="w-full justify-between py-5"
+//                         onClick={() => navigate(item.href)}
+//                       >
+//                         {item.label}
+//                         {item.submenu && <ChevronRight />}
+//                       </Button>
+//                     ) : (
+//                       <Button
+//                         variant="ghost"
+//                         className="w-full justify-between py-5"
+//                         onClick={() => setActiveSubmenu(item)}
+//                       >
+//                         {item.label}
+//                         {item.submenu && <ChevronRight />}
+//                       </Button>
+//                     )}
+//                   </motion.div>
+//                 ))}
+//               </div>
+//             </ScrollArea>
+
+//             {/* Submenu */}
+//             <AnimatePresence>
+//               {activeSubmenu && (
+//                 <ScrollArea className="w-[360px] border-r bg-background/80 backdrop-blur">
+//                   <div className="p-8">
+//                     <Button
+//                       variant="ghost"
+//                       className="mb-6"
+//                       onClick={() => setActiveSubmenu(null)}
+//                     >
+//                       <ChevronLeft /> Back
+//                     </Button>
+
+//                     {activeSubmenu.submenu?.map((item, i) => (
+//                       <motion.div
+//                         key={item.label}
+//                         initial={{ opacity: 0, x: 20 }}
+//                         animate={{ opacity: 1, x: 0 }}
+//                         transition={{ delay: i * 0.05 }}
+//                       >
+//                         <Button
+//                           variant="ghost"
+//                           className="w-full justify-between py-4"
+//                           onClick={() => navigate(item.href)}
+//                         >
+//                           {item.label}
+//                         </Button>
+//                       </motion.div>
+//                     ))}
+//                   </div>
+//                 </ScrollArea>
+//               )}
+//             </AnimatePresence>
+//           </div>
+//         </motion.div>
+//       )}
+//     </AnimatePresence>
+//   )
+// }

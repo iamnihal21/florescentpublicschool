@@ -85,9 +85,9 @@ export default function WhyChooseUsView({ data }: { data: AdmissionData }) {
                 <h3 className="text-xl font-bold mb-3">
                   {feature.title}
                 </h3>
-                <p className="text-muted-foreground">
+                {/* <p className="text-muted-foreground">
                   {feature.description}
-                </p>
+                </p> */}
               </motion.div>
             )
           })}

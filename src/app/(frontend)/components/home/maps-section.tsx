@@ -8,7 +8,7 @@ interface MapsSectionProps {
 }
 
 export function MapsSection({ contactInfo }: MapsSectionProps) {
-  const street = contactInfo?.schoolAddress?.street ?? "Nr. Cambay Hotel, S.G. Highway Road, "
+  const street = contactInfo?.schoolAddress?.street ?? "Nr. Palladium mall, S.G. Highway Road, "
   const city = contactInfo?.schoolAddress?.city ?? "Thaltej, Ahmedabad-380 054."
   const phone = contactInfo?.primaryContact?.phone ?? "9724896330"
   const mapUrl = contactInfo?.locationInfo?.mapEmbedUrl ?? "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3671.026315496377!2d72.52242187!3d23.05949679!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e835519d27f37%3A0xa903dd3f424f9a0f!2sFlorescent%20school!5e0!3m2!1sen!2sin!4v1767620917883!5m2!1sen!2sin"

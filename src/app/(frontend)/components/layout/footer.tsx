@@ -31,7 +31,7 @@ export function Footer() {
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-primary mt-1" />
                 <p className="text-gray-400 leading-relaxed">
-                  Nr. Cambay Hotel, S.G. Highway Road,
+                  Nr. Palladium mall, S.G. Highway Road,
                   <br />
                   Thaltej, Ahmedabad-380 054.
                 </p>

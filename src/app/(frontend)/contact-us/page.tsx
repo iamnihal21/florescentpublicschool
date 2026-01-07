@@ -1,10 +1,25 @@
+import { Suspense } from 'react'
 import { getPayload } from 'payload'
 import config from '@/payload/payload.config'
-import ContactView from './ContactView'
+import ContactMainUI from './ContactMainUI'
+import ContactSkeleton from './ContactSkeleton'
 
-export default async function Page() {
+export default async function ContactPage() {
+  return (
+    <main className="min-h-screen bg-background">
+      <Suspense fallback={<ContactSkeleton />}>
+        <ContactDataFetcher />
+      </Suspense>
+    </main>
+  )
+}
+
+async function ContactDataFetcher() {
   const payload = await getPayload({ config })
-  const data = await payload.findGlobal({ slug: 'contact-page' })
+  
+  const data = await payload.findGlobal({
+    slug: 'contact-page',
+  })
 
-  return <ContactView data={data} />
+  return <ContactMainUI data={data} />
 }

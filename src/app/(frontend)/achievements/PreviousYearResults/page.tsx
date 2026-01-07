@@ -1,12 +1,29 @@
+import { Suspense } from 'react'
 import { getPayload } from 'payload'
 import config from '@/payload/payload.config'
-import ResultsView from './prevRes'
+import ResultsMainUI from './ResultsMainUI'
+import ResultsSkeleton from './ResultsSkeleton'
 
 export default async function ResultsPage() {
+  return (
+    <main className="min-h-screen bg-background">
+      {/* This boundary ensures the page changes INSTANTLY to 
+          the /results URL while the database is queried. 
+      */}
+      <Suspense fallback={<ResultsSkeleton />}>
+        <ResultsDataFetcher />
+      </Suspense>
+    </main>
+  )
+}
+
+async function ResultsDataFetcher() {
   const payload = await getPayload({ config })
-  const globalData = await payload.findGlobal({
+  
+  const data = await payload.findGlobal({
     slug: 'achievements-page',
   })
 
-  return <ResultsView data={globalData.resultsSection} />
+  // Passing the resultsSection specifically to the UI
+  return <ResultsMainUI data={data.resultsSection} />
 }
