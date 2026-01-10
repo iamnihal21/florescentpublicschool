@@ -3,6 +3,7 @@ import { getPayload } from 'payload'
 import config from '@/payload/payload.config'
 import AdmissionMainUI from './AdmissionMainUI'
 import AdmissionSkeleton from './AdmissionSkeleton'
+import WhyChooseUsView from './WhyChooseUs'
 
 export default async function AdmissionPage() {
   return (
@@ -22,5 +23,10 @@ async function AdmissionDataFetcher() {
     slug: 'admission-page',
   })
 
-  return <AdmissionMainUI data={data} />
+  return (
+    <>
+      <AdmissionMainUI data={data} />
+      <WhyChooseUsView data={data} />
+    </>
+  )
 }

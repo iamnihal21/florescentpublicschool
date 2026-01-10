@@ -1,6 +1,5 @@
 import { Header } from '@/app/(frontend)/components/layout/header'
 import { Footer } from '@/app/(frontend)/components/layout/footer'
-import { Geist, Geist_Mono } from 'next/font/google'
 // import { NavbarColorFix } from "@/app/(frontend)/components/layout/NavbarColorFix";
 import type { Metadata } from 'next'
 
@@ -11,16 +10,6 @@ export const metadata: Metadata = {
     icon: '/favicon.ico',
   },
 }
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-})
 
 export default function FrontendLayout({ children }: { children: React.ReactNode }) {
   return (

@@ -14,8 +14,13 @@ export const AcademicsPage: GlobalConfig = {
       type: 'group',
       fields: [
         { name: 'title', type: 'text', required: true, defaultValue: 'Examination & Academics' },
-        { name: 'subtitle', type: 'textarea', defaultValue: 'Access examination schedules, fee information, notices, and academic resources' },
-      ]
+        {
+          name: 'subtitle',
+          type: 'textarea',
+          defaultValue:
+            'Access examination schedules, fee information, notices, and academic resources',
+        },
+      ],
     },
     {
       name: 'examSchedules',
@@ -25,13 +30,13 @@ export const AcademicsPage: GlobalConfig = {
         { name: 'term', type: 'text', required: true },
         { name: 'date', type: 'text', required: true },
         { name: 'classes', type: 'text', required: true },
-        { 
-          name: 'status', 
-          type: 'select', 
+        {
+          name: 'status',
+          type: 'select',
           options: ['Upcoming', 'Ongoing', 'Completed'],
-          defaultValue: 'Upcoming' 
+          defaultValue: 'Upcoming',
         },
-      ]
+      ],
     },
     {
       name: 'upcomingEvents',
@@ -44,19 +49,21 @@ export const AcademicsPage: GlobalConfig = {
         { name: 'venue', type: 'text', required: true },
         { name: 'category', type: 'text' },
         { name: 'participants', type: 'text' },
-      ]
+      ],
     },
     {
       name: 'ptmSchedules',
       type: 'array',
       label: 'PTM Schedule',
       fields: [
-        { name: 'classes', type: 'text', required: true },
+        { name: 'Exam', type: 'text', required: true },
         { name: 'date', type: 'text', required: true },
         { name: 'time', type: 'text', required: true },
         { name: 'venue', type: 'text', required: true },
-        { name: 'type', type: 'text', defaultValue: 'Regular PTM' },
-      ]
-    }
+        { name: 'Points To Discuss', type: 'array', 
+          fields: [
+            { name: 'point 1', type: 'text',defaultValue: 'Regular PTM' }] },
+      ],
+    },
   ],
 }

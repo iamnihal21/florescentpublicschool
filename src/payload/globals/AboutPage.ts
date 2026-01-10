@@ -89,7 +89,7 @@ export const AboutPage: GlobalConfig = {
           name: 'image',
           type: 'upload',
           relationTo: 'media',
-          required: true,
+          // required: true,
         },
 
         /** ✅ NEW: Introduction */

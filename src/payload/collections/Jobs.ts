@@ -13,13 +13,13 @@ export const Jobs: CollectionConfig = {
     {
       name: 'title',
       type: 'text',
-      required: true,
+      // required: true,
       label: 'Position Title',
     },
     {
       name: 'department',
       type: 'select',
-      required: true,
+      // required: true,
       options: [
         { label: 'Academic (Teaching)', value: 'academic' },
         { label: 'Administration', value: 'admin' },

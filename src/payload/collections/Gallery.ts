@@ -13,7 +13,7 @@ export const Gallery: CollectionConfig = {
     {
       name: 'title',
       type: 'text',
-      required: true,
+      // required: true,
     },
     {
       name: 'description',
@@ -22,7 +22,7 @@ export const Gallery: CollectionConfig = {
     {
       name: 'category',
       type: 'select',
-      required: true,
+      // required: true,
       options: [
         { label: 'Sports', value: 'sports' },
         { label: 'Arts', value: 'arts' },
@@ -35,7 +35,7 @@ export const Gallery: CollectionConfig = {
       name: 'image',
       type: 'upload',
       relationTo: 'media',
-      required: true,
+      // required: true,
     },
     {
       name: 'date',

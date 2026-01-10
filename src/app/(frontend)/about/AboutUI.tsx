@@ -11,7 +11,7 @@ export default function AboutUI({ data }: { data: any }) {
     <section className="bg-background">
       {/* HERO */}
       <section className="relative overflow-hidden py-24 md:py-32">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10" />
+        <div className="absolute inset-0 bg-linear-to-br from-primary/10 via-transparent to-secondary/10" />
         <div className="relative container mx-auto px-4 text-center max-w-4xl">
           <motion.span
             initial={{ opacity: 0, y: 10 }}
@@ -36,7 +36,7 @@ export default function AboutUI({ data }: { data: any }) {
           </motion.p>
         </div>
         <div className="relative mt-20">
-          <div className="absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent -translate-y-1/2" />
+          <div className="absolute top-1/2 left-0 w-full h-1 bg-linear-to-r from-transparent via-primary/30 to-transparent -translate-y-1/2" />
           <div className="relative flex justify-center">
             <div className="bg-background px-8 py-3 border border-border/50 rounded-full shadow-lg">
               Guiding Florescent Since {establishedYear}
@@ -57,7 +57,7 @@ export default function AboutUI({ data }: { data: any }) {
             className="w-full bg-background border border-border/50 rounded-3xl p-8 md:p-12 flex flex-col md:flex-row gap-10 items-center"
           >
             <div className="flex-shrink-0">
-              <div className={`relative w-48 h-48 rounded-full overflow-hidden border-4 bg-gradient-to-br ${leader.gradient}`}>
+              <div className={`relative w-48 h-48 rounded-full overflow-hidden border-4 bg-linear-to-br ${leader.gradient}`}>
                 {leader.image && typeof leader.image !== 'string' && (
                   <Image src={(leader.image as Media).url || ''} alt={leader.name} fill className="object-cover" />
                 )}

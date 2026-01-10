@@ -18,10 +18,10 @@ export default function GalleryView({ initialImages }: { initialImages: GalleryT
       : initialImages.filter((img) => img.category === activeCategory)
 
   return (
-    <div className="min-h-screen bg-gradient-to-b to-background via-background from-primary/5 pb-20">
+    <div className="min-h-screen bg-linear-to-b to-background via-background from-primary/5 pb-20">
       {/* ================= HERO SECTION ================= */}
       <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-muted/30 to-background" />
+        <div className="absolute inset-0 bg-linear-to-b from-muted/30 to-background" />
 
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
@@ -45,7 +45,7 @@ export default function GalleryView({ initialImages }: { initialImages: GalleryT
           </motion.div>
         </div>
         <div className="relative md:mt-20">
-          <div className="absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent -translate-y-1/2"></div>
+          <div className="absolute top-1/2 left-0 w-full h-1 bg-linear-to-r from-transparent via-primary/30 to-transparent -translate-y-1/2"></div>
           <div className="relative flex justify-center">
             <div className="bg-background px-8 py-3 border border-border/50 rounded-full shadow-lg">
               <span className="text-base font-medium text-foreground flex items-center gap-2">
@@ -93,7 +93,7 @@ export default function GalleryView({ initialImages }: { initialImages: GalleryT
                 className="group relative bg-card rounded-3xl overflow-hidden border border-border shadow-sm hover:shadow-xl transition-all"
               >
                 <div
-                  className="relative aspect-[4/3] cursor-zoom-in"
+                  className="relative aspect-4/3 cursor-zoom-in"
                   onClick={() => setSelectedImage(item)}
                 >
                   <Image
@@ -149,7 +149,7 @@ export default function GalleryView({ initialImages }: { initialImages: GalleryT
             <motion.div
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
-              className="relative max-w-5xl w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl"
+              className="relative max-w-5xl w-full aspect-16/9 rounded-2xl overflow-hidden shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               <Image

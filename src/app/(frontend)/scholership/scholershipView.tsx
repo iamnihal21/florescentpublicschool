@@ -12,7 +12,7 @@ export default function ScholarshipView({
   scholarships: Scholarship[]
 }) {
   return (
-    <div className="min-h-screen bg-background bg-gradient-to-br from-secondary/5 via-primary/5 to-background">
+    <div className="min-h-screen bg-background bg-linear-to-br from-secondary/5 via-primary/5 to-background">
       {/* Hero Section - Matching your existing style */}
       <section className="relative py-20 md:py-32 overflow-hidden ">
         <div className="container mx-auto px-4 relative z-10 text-center">
@@ -34,7 +34,7 @@ export default function ScholarshipView({
         </div>
 
         <div className="relative md:mt-20">
-          <div className="absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent -translate-y-1/2"></div>
+          <div className="absolute top-1/2 left-0 w-full h-1 bg-linear-to-r from-transparent via-primary/30 to-transparent -translate-y-1/2"></div>
           <div className="relative flex justify-center">
             <div className="bg-background px-8 py-3 border border-border/50 rounded-full shadow-lg">
               <span className="text-base font-medium text-foreground flex items-center gap-2">
@@ -89,7 +89,7 @@ export default function ScholarshipView({
             <div className="grid md:grid-cols-2 gap-8">
               {data.conditions?.map((item, idx) => (
                 <div key={idx} className="flex gap-4 items-start">
-                  <div className="mt-1 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary font-bold text-xs">
+                  <div className="mt-1 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 text-primary font-bold text-xs">
                     {idx + 1}
                   </div>
                   <p className="text-muted-foreground leading-relaxed">{item.rule}</p>
@@ -98,7 +98,7 @@ export default function ScholarshipView({
             </div>
             <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-6">
               <p className="text-sm text-muted-foreground italic">
-                Scholarships are awarded during the annual "Prize Distribution Program" (Feb-Mar).
+                Scholarships are awarded during the annual &quot;Prize Distribution Program&quot; (Feb-Mar).
               </p>
             </div>
           </motion.div>

@@ -172,7 +172,7 @@ export interface User {
  */
 export interface Media {
   id: number;
-  alt: string;
+  alt?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -184,16 +184,6 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
-  sizes?: {
-    thumbnail?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -201,10 +191,10 @@ export interface Media {
  */
 export interface Testimonial {
   id: number;
-  quote: string;
-  author: string;
+  quote?: string | null;
+  author?: string | null;
   role?: string | null;
-  image: number | Media;
+  image?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -214,10 +204,10 @@ export interface Testimonial {
  */
 export interface Gallery {
   id: number;
-  title: string;
+  title?: string | null;
   description?: string | null;
-  category: 'sports' | 'arts' | 'academic' | 'campus' | 'events';
-  image: number | Media;
+  category?: ('sports' | 'arts' | 'academic' | 'campus' | 'events') | null;
+  image?: (number | null) | Media;
   date?: string | null;
   featured?: boolean | null;
   updatedAt: string;
@@ -229,8 +219,8 @@ export interface Gallery {
  */
 export interface Job {
   id: number;
-  title: string;
-  department: 'academic' | 'admin' | 'support' | 'specialized';
+  title?: string | null;
+  department?: ('academic' | 'admin' | 'support' | 'specialized') | null;
   location?: string | null;
   type?: ('full-time' | 'part-time' | 'contract') | null;
   requirements?:
@@ -387,20 +377,6 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
-  sizes?:
-    | T
-    | {
-        thumbnail?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -511,7 +487,7 @@ export interface HomePage {
     | {
         title: string;
         highlightWord?: string | null;
-        image: number | Media;
+        image?: (number | null) | Media;
         id?: string | null;
       }[]
     | null;
@@ -519,7 +495,7 @@ export interface HomePage {
     | {
         title: string;
         description: string;
-        image: number | Media;
+        image?: (number | null) | Media;
         buttonText?: string | null;
         id?: string | null;
       }[]
@@ -575,7 +551,7 @@ export interface AboutPage {
     | {
         name: string;
         role: string;
-        image: number | Media;
+        image?: (number | null) | Media;
         /**
          * Brief professional introduction/background of the leader
          */
@@ -668,7 +644,7 @@ export interface AchievementsPage {
       | null;
     results?:
       | {
-          image: number | Media;
+          image?: (number | null) | Media;
           id?: string | null;
         }[]
       | null;
@@ -688,7 +664,7 @@ export interface AchievementsPage {
       | {
           title: string;
           description?: string | null;
-          image: number | Media;
+          image?: (number | null) | Media;
           id?: string | null;
         }[]
       | null;
@@ -701,7 +677,7 @@ export interface AchievementsPage {
           name: string;
           achievementTitle: string;
           description: string;
-          image: number | Media;
+          image?: (number | null) | Media;
           id?: string | null;
         }[]
       | null;
@@ -718,7 +694,7 @@ export interface AchievementsPage {
           category?: ('Science & Technology' | 'Literary' | 'Sports' | 'Cultural' | 'STEM') | null;
           images?:
             | {
-                image: number | Media;
+                image?: (number | null) | Media;
                 id?: string | null;
               }[]
             | null;
@@ -767,11 +743,16 @@ export interface AcademicsPage {
     | null;
   ptmSchedules?:
     | {
-        classes: string;
+        Exam: string;
         date: string;
         time: string;
         venue: string;
-        type?: string | null;
+        'Points To Discuss'?:
+          | {
+              'point 1'?: string | null;
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
       }[]
     | null;
@@ -787,7 +768,7 @@ export interface AdmissionPage {
   welcomeSection: {
     title: string;
     subtitle?: string | null;
-    image: number | Media;
+    image?: (number | null) | Media;
   };
   admissionProcess?: {
     title?: string | null;
@@ -1162,11 +1143,16 @@ export interface AcademicsPageSelect<T extends boolean = true> {
   ptmSchedules?:
     | T
     | {
-        classes?: T;
+        Exam?: T;
         date?: T;
         time?: T;
         venue?: T;
-        type?: T;
+        'Points To Discuss'?:
+          | T
+          | {
+              'point 1'?: T;
+              id?: T;
+            };
         id?: T;
       };
   updatedAt?: T;

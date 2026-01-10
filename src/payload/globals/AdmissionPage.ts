@@ -15,7 +15,7 @@ export const AdmissionPage: GlobalConfig = {
       fields: [
         { name: 'title', type: 'text', required: true },
         { name: 'subtitle', type: 'textarea' },
-        { name: 'image', type: 'upload', relationTo: 'media', required: true },
+        { name: 'image', type: 'upload', relationTo: 'media', }//required: true },
       ]
     },
     {

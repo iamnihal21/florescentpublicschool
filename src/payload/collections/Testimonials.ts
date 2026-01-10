@@ -10,12 +10,12 @@ export const Testimonials: CollectionConfig = {
     {
       name: 'quote',
       type: 'textarea',
-      required: true,
+      // required: true,
     },
     {
       name: 'author',
       type: 'text',
-      required: true,
+      // required: true,
     },
     {
       name: 'role',
@@ -28,7 +28,7 @@ export const Testimonials: CollectionConfig = {
       name: 'image',
       type: 'upload',
       relationTo: 'media',
-      required: true,
+      // required: true,
     },
   ],
 }

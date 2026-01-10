@@ -19,7 +19,7 @@ export default function GallerySkeleton() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[1, 2, 3, 4, 5, 6].map((i) => (
             <div key={i} className="space-y-4">
-              <div className="aspect-[4/3] bg-muted rounded-[2rem]" />
+              <div className="aspect-4/3 bg-muted rounded-2rem" />
               <div className="h-6 w-2/3 bg-muted rounded-lg" />
               <div className="h-4 w-full bg-muted rounded-lg" />
             </div>
